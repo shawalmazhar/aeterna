@@ -79,8 +79,18 @@ document.addEventListener("DOMContentLoaded", () => {
    3. WebP Image Sequence Preloader (Pre-renders all frames in memory)
    ========================================================================== */
 // Determine frame rate/resolution based on screen width to optimize load time on mobile!
-const isMobileDevice = window.innerWidth <= 768;
-const frameStep = isMobileDevice ? 3 : 1; // Downsample 3x on mobile (only load every 3rd frame, cutting size by 67%!)
+const width = window.innerWidth;
+let frameStep = 1;
+if (width <= 480) {
+    frameStep = 4; // Ultra-fast load on mobile phones (only loads 32 frames, saving 75% bandwidth!)
+} else if (width <= 768) {
+    frameStep = 3; // Fast load on large mobile devices (43 frames)
+} else if (width <= 1024) {
+    frameStep = 2; // Tablets (64 frames)
+} else {
+    frameStep = 1; // Full elite experience on desktop (128 frames)
+}
+
 const totalSequenceFrames = 128;
 const startFrame = 73;
 
@@ -92,73 +102,88 @@ const frameIndices = [];
 for (let i = 0; i < totalSequenceFrames; i += frameStep) {
     frameIndices.push(startFrame + i);
 }
-const frameCount = frameIndices.length; // e.g. 43 frames on mobile, 128 on desktop
-
-// Initialize all image objects immediately and flag them as not loaded
-for (let i = 0; i < frameCount; i++) {
-    const img = new Image();
-    img.loaded = false;
-    images.push(img);
-}
+const frameCount = frameIndices.length; // e.g. 32 on mobile, 128 on desktop
 
 function preloadSequenceFrames(callback) {
     const bar = document.getElementById("loader-bar");
     
-    // 1. Load the first key frame immediately to unlock the page in under 100ms!
-    const firstImg = images[0];
-    const firstFrameNum = frameIndices[0];
+    // Create image objects in images array
+    for (let i = 0; i < frameCount; i++) {
+        const img = new Image();
+        img.loaded = false;
+        images.push(img);
+    }
     
-    firstImg.onload = () => {
-        firstImg.loaded = true;
-        loadedCount = 1;
+    // We will download all frames concurrently using fetch Blobs for maximum network speed
+    let loadedCount = 0;
+    
+    const promises = frameIndices.map((frameNum, index) => {
+        const url = `webp2/ezgif-frame-${frameNum.toString().padStart(3, '0')}.webp`;
         
+        return fetch(url)
+            .then(response => {
+                if (!response.ok) throw new Error("Network response was not ok");
+                return response.blob();
+            })
+            .then(blob => {
+                const objectURL = URL.createObjectURL(blob);
+                
+                // Assign to our Image object
+                return new Promise((resolve) => {
+                    const img = images[index];
+                    img.onload = () => {
+                        img.loaded = true;
+                        loadedCount++;
+                        
+                        // Update loader bar percentage
+                        const percent = Math.round((loadedCount / frameCount) * 100);
+                        if (bar) {
+                            bar.style.width = `${percent}%`;
+                        }
+                        resolve();
+                    };
+                    img.onerror = () => {
+                        console.error(`Error loading image object for frame ${frameNum}`);
+                        resolve(); // resolve anyway to avoid breaking the loader
+                    };
+                    img.src = objectURL;
+                });
+            })
+            .catch(error => {
+                console.warn(`Failed to fetch WebP frame ${frameNum} via blob, falling back to standard loader:`, error);
+                
+                // Fallback to standard Image loading in case fetch/CORS fails locally
+                return new Promise((resolve) => {
+                    const img = images[index];
+                    img.onload = () => {
+                        img.loaded = true;
+                        loadedCount++;
+                        const percent = Math.round((loadedCount / frameCount) * 100);
+                        if (bar) {
+                            bar.style.width = `${percent}%`;
+                        }
+                        resolve();
+                    };
+                    img.onerror = () => {
+                        resolve();
+                    };
+                    img.src = url;
+                });
+            });
+    });
+    
+    // Wait for all frames to be fully downloaded and cached before entering the website!
+    Promise.all(promises).then(() => {
         if (bar) {
-            bar.style.width = "100%"; // set loading bar to full instantly
+            bar.style.width = "100%";
         }
         
-        // Render first frame immediately
-        drawFrame(0);
-        
-        // Fade out loader immediately so the site is instantly active and usable!
-        callback();
-        
-        // 2. Begin progressive loading of remaining frames in the background!
-        loadRemainingFramesProgressively();
-    };
-    
-    firstImg.onerror = () => {
-        console.error("AETERNA preloader: Failed to load initial frame image.");
-        loadedCount = 1;
-        callback();
-        loadRemainingFramesProgressively();
-    };
-    
-    firstImg.src = `webp2/ezgif-frame-${firstFrameNum.toString().padStart(3, '0')}.webp`;
-}
-
-function loadRemainingFramesProgressively() {
-    // Progressively load all remaining frames in parallel background processes
-    for (let i = 1; i < frameCount; i++) {
-        const img = images[i];
-        const frameNum = frameIndices[i];
-        
-        img.onload = () => {
-            img.loaded = true;
-            loadedCount++;
-            
-            // If the user has scrolled or is browsing on the home page, redraw canvas
-            if (activePageId === "home") {
-                handleWatchScroll();
-            }
-        };
-        
-        img.onerror = () => {
-            console.warn(`AETERNA progressive preloader: Failed to load background frame at webp2/ezgif-frame-${frameNum.toString().padStart(3, '0')}.webp`);
-            img.loaded = false;
-        };
-        
-        img.src = `webp2/ezgif-frame-${frameNum.toString().padStart(3, '0')}.webp`;
-    }
+        // Wait 150ms for CSS bar transition to finish, then draw initial frame and show site!
+        setTimeout(() => {
+            drawFrame(0);
+            callback();
+        }, 150);
+    });
 }
 
 
