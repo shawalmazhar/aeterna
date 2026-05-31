@@ -14,5 +14,4 @@ Desktop.ini
 png/
 webp/
 
-# Heavy video files (not used by active live website)
-*.mp4
+

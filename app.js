@@ -9,7 +9,7 @@ const WATCH_DATABASE = {
         tag: "LIMITED ATELIER RUN / 50 UNITS",
         price: "$45,000 USD",
         desc: "Designed for the modern horological purist who demands mechanical complexity, The Chrono features a brushed steel bezel with custom tachymetric engravings and a signature hand-painted champagne gold skeleton dial. Its three concentric sub-dials track time with immaculate precision.",
-        img: "assets/chrono_watch.png",
+        img: "assets/chrono_watch.webp",
         features: [
             "AETERNA Caliber 9003 Double Barrel Mechanical Chronograph",
             "72-hour power reserve with twin escapement architecture",
@@ -23,7 +23,7 @@ const WATCH_DATABASE = {
         tag: "THE DESIGN CLASSIC EDITION",
         price: "$38,000 USD",
         desc: "Stripped of all excess, The Minimalist is a testament to the power of negative space. An ultra-slim 8.2mm chassis houses a beautiful open-heart caliber, putting the balance wheel on display. The micro-brushed golden hands float over a deep charcoal sandblasted dial plate.",
-        img: "assets/minimalist_watch.png",
+        img: "assets/minimalist_watch.webp",
         features: [
             "AETERNA Caliber 9001 Ultra-thin Skeleton Movement",
             "60-hour power reserve with high-efficiency mainspring",
@@ -37,7 +37,7 @@ const WATCH_DATABASE = {
         tag: "TITANIUM CARBON MONOLITH",
         price: "$52,000 USD",
         desc: "A bold, technological monolith. The Stealth is crafted from a proprietary block of matte black forged carbon fiber and sandblasted dark titanium. The dark open-heart caliber features ruthenium-plated gears and glowing gold luminescent indexes, readable in absolute darkness.",
-        img: "assets/stealth_watch.png",
+        img: "assets/stealth_watch.webp",
         features: [
             "AETERNA Caliber 9005 Dark Ruthenium Skeleton Movement",
             "78-hour power reserve with silicon shock-absorption springs",
