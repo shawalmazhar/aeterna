@@ -78,17 +78,28 @@ document.addEventListener("DOMContentLoaded", () => {
 /* ==========================================================================
    3. WebP Image Sequence Preloader (Pre-renders all frames in memory)
    ========================================================================== */
-const frameCount = 128;
+// Determine frame rate/resolution based on screen width to optimize load time on mobile!
+const isMobileDevice = window.innerWidth <= 768;
+const frameStep = isMobileDevice ? 3 : 1; // Downsample 3x on mobile (only load every 3rd frame, cutting size by 67%!)
+const totalSequenceFrames = 128;
 const startFrame = 73;
+
 const images = [];
 let loadedCount = 0;
+const frameIndices = [];
+
+// Populate the active frame indices based on step size
+for (let i = 0; i < totalSequenceFrames; i += frameStep) {
+    frameIndices.push(startFrame + i);
+}
+const frameCount = frameIndices.length; // e.g. 43 frames on mobile, 128 on desktop
 
 function preloadSequenceFrames(callback) {
     const bar = document.getElementById("loader-bar");
     
     for (let i = 0; i < frameCount; i++) {
         const img = new Image();
-        const frameNum = startFrame + i;
+        const frameNum = frameIndices[i];
         
         img.onload = () => {
             loadedCount++;
@@ -166,6 +177,13 @@ function initializeRouter() {
     navigate(startHash, true);
 }
 
+function triggerPageAnimations(page) {
+    if (!page) return;
+    page.querySelectorAll(".scroll-animate-left, .scroll-animate-right").forEach(el => {
+        el.classList.add("triggered");
+    });
+}
+
 function navigate(pageId, isInitial = false) {
     if (isTransitioning && !isInitial) return; // Prevent transition stacking loops
     
@@ -190,6 +208,7 @@ function navigate(pageId, isInitial = false) {
     if (isInitial) {
         // Instant load
         targetPage.classList.add("active", "fade-in");
+        triggerPageAnimations(targetPage);
         return;
     }
 
@@ -207,6 +226,7 @@ function navigate(pageId, isInitial = false) {
             // Force redraw for CSS transition trigger
             targetPage.offsetHeight; 
             targetPage.classList.add("fade-in");
+            triggerPageAnimations(targetPage);
             
             // Scroll back to top on page load
             window.scrollTo({ top: 0, behavior: "smooth" });
@@ -222,6 +242,7 @@ function navigate(pageId, isInitial = false) {
         targetPage.classList.add("active");
         targetPage.offsetHeight;
         targetPage.classList.add("fade-in");
+        triggerPageAnimations(targetPage);
         isTransitioning = false;
     }
 }
@@ -248,6 +269,8 @@ function initializeScrollDeconstruction() {
     handleWatchScroll(); // initial draw
 }
 
+let lastWidth = 0;
+
 function drawFrame(index) {
     const canvas = document.getElementById("hero-canvas");
     if (!canvas) return;
@@ -256,9 +279,13 @@ function drawFrame(index) {
     const img = images[index];
     if (!img) return;
 
-    // Set canvas dimensions responsive to inner viewport width
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    // On mobile, only resize when the screen width changes (rotation), ignoring vertical address bar height changes to prevent scroll flicker!
+    const widthChanged = Math.abs(window.innerWidth - lastWidth) > 20; 
+    if (lastWidth === 0 || widthChanged) {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        lastWidth = window.innerWidth;
+    }
 
     // Centered cover scaling calculation (fully covers the entire screen, leaving no empty space below!)
     const hRatio = canvas.width / img.width;

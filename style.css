@@ -2515,3 +2515,12 @@ button, input, select, textarea {
         gap: 30px;
     }
 }
+
+/* Prevent opacity: 0 from hiding assets and text on mobile when IntersectionObserver fails or lags */
+@media (max-width: 991px) {
+    .scroll-animate-left, .scroll-animate-right {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
+}
