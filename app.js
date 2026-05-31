@@ -48,143 +48,31 @@ const WATCH_DATABASE = {
     }
 };
 
-// 2. Global Elements Initializations & WebP Preloading
+// 2. Global Elements Initializations & Preloader Fading
 document.addEventListener("DOMContentLoaded", () => {
-    // Begin preloading WebP frames first to show dynamic loader progress
-    preloadSequenceFrames(() => {
-        // Hide loader overlay once all 128 frames are in memory
-        const loader = document.getElementById("loader");
+    // Initialize Navigation Router & Header scroll effects
+    initializeRouter();
+    initializeHeaderScroll();
+    
+    // Initialize Visual Micro-interactions
+    initializeHeritageAnimations();
+    initializeEngineeringBlueprint();
+    
+    // Initialize Bespoke Configurator State
+    updateConfiguratorText();
+
+    // Trigger an elegant, high-end 800ms brand logo aura reveal, then fade out the loader overlay!
+    const loader = document.getElementById("loader");
+    const bar = document.getElementById("loader-bar");
+    if (bar) {
+        bar.style.width = "100%";
+    }
+    setTimeout(() => {
         if (loader) {
             loader.classList.add("fade-out");
         }
-
-        // Draw initial sequence frame
-        drawFrame(0);
-
-        // Initialize Navigation Router & Header scroll effects
-        initializeRouter();
-        initializeHeaderScroll();
-        
-        // Initialize Visual Micro-interactions
-        initializeScrollDeconstruction();
-        initializeHeritageAnimations();
-        initializeEngineeringBlueprint();
-        
-        // Initialize Bespoke Configurator State
-        updateConfiguratorText();
-    });
+    }, 850);
 });
-
-/* ==========================================================================
-   3. WebP Image Sequence Preloader (Pre-renders all frames in memory)
-   ========================================================================== */
-// Determine frame rate/resolution based on screen width to optimize load time on mobile!
-const width = window.innerWidth;
-let frameStep = 1;
-if (width <= 480) {
-    frameStep = 4; // Ultra-fast load on mobile phones (only loads 32 frames, saving 75% bandwidth!)
-} else if (width <= 768) {
-    frameStep = 3; // Fast load on large mobile devices (43 frames)
-} else if (width <= 1024) {
-    frameStep = 2; // Tablets (64 frames)
-} else {
-    frameStep = 1; // Full elite experience on desktop (128 frames)
-}
-
-const totalSequenceFrames = 82;
-const startFrame = 101;
-
-const images = [];
-let loadedCount = 0;
-const frameIndices = [];
-
-// Populate the active frame indices based on step size
-for (let i = 0; i < totalSequenceFrames; i += frameStep) {
-    frameIndices.push(startFrame + i);
-}
-const frameCount = frameIndices.length; // e.g. 32 on mobile, 128 on desktop
-
-function preloadSequenceFrames(callback) {
-    const bar = document.getElementById("loader-bar");
-    
-    // Create image objects in images array
-    for (let i = 0; i < frameCount; i++) {
-        const img = new Image();
-        img.loaded = false;
-        images.push(img);
-    }
-    
-    // We will download all frames concurrently using fetch Blobs for maximum network speed
-    let loadedCount = 0;
-    
-    const promises = frameIndices.map((frameNum, index) => {
-        const url = `webp2/ezgif-frame-${frameNum.toString().padStart(3, '0')}.webp`;
-        
-        return fetch(url)
-            .then(response => {
-                if (!response.ok) throw new Error("Network response was not ok");
-                return response.blob();
-            })
-            .then(blob => {
-                const objectURL = URL.createObjectURL(blob);
-                
-                // Assign to our Image object
-                return new Promise((resolve) => {
-                    const img = images[index];
-                    img.onload = () => {
-                        img.loaded = true;
-                        loadedCount++;
-                        
-                        // Update loader bar percentage
-                        const percent = Math.round((loadedCount / frameCount) * 100);
-                        if (bar) {
-                            bar.style.width = `${percent}%`;
-                        }
-                        resolve();
-                    };
-                    img.onerror = () => {
-                        console.error(`Error loading image object for frame ${frameNum}`);
-                        resolve(); // resolve anyway to avoid breaking the loader
-                    };
-                    img.src = objectURL;
-                });
-            })
-            .catch(error => {
-                console.warn(`Failed to fetch WebP frame ${frameNum} via blob, falling back to standard loader:`, error);
-                
-                // Fallback to standard Image loading in case fetch/CORS fails locally
-                return new Promise((resolve) => {
-                    const img = images[index];
-                    img.onload = () => {
-                        img.loaded = true;
-                        loadedCount++;
-                        const percent = Math.round((loadedCount / frameCount) * 100);
-                        if (bar) {
-                            bar.style.width = `${percent}%`;
-                        }
-                        resolve();
-                    };
-                    img.onerror = () => {
-                        resolve();
-                    };
-                    img.src = url;
-                });
-            });
-    });
-    
-    // Wait for all frames to be fully downloaded and cached before entering the website!
-    Promise.all(promises).then(() => {
-        if (bar) {
-            bar.style.width = "100%";
-        }
-        
-        // Wait 150ms for CSS bar transition to finish, then draw initial frame and show site!
-        setTimeout(() => {
-            drawFrame(0);
-            callback();
-        }, 150);
-    });
-}
 
 
 /* ==========================================================================
@@ -290,11 +178,6 @@ function navigate(pageId, isInitial = false) {
             // Scroll back to top on page load
             window.scrollTo({ top: 0, behavior: "smooth" });
             
-            // Re-check scroll deconstruction trigger if loaded home
-            if (pageId === "home") {
-                handleWatchScroll();
-            }
-            
             isTransitioning = false;
         }, 550);
     } else {
@@ -319,130 +202,7 @@ function initializeHeaderScroll() {
 }
 
 
-/* ==========================================================================
-   5. Canvas Sequence Drawing & Scroll-Driven Captions (Home Hero)
-   ========================================================================== */
-function initializeScrollDeconstruction() {
-    window.addEventListener("scroll", handleWatchScroll);
-    window.addEventListener("resize", handleWatchScroll);
-    handleWatchScroll(); // initial draw
-}
 
-let lastWidth = 0;
-
-function drawFrame(index) {
-    const canvas = document.getElementById("hero-canvas");
-    if (!canvas) return;
-    const context = canvas.getContext("2d");
-    
-    // Check if targeted frame is loaded, else find the closest loaded frame to draw
-    let img = images[index];
-    if (!img) return;
-
-    if (!img.loaded) {
-        let closestIndex = -1;
-        let minDiff = Infinity;
-        for (let i = 0; i < frameCount; i++) {
-            if (images[i] && images[i].loaded) {
-                const diff = Math.abs(i - index);
-                if (diff < minDiff) {
-                    minDiff = diff;
-                    closestIndex = i;
-                }
-            }
-        }
-        if (closestIndex !== -1) {
-            img = images[closestIndex];
-        } else {
-            return; // no images loaded yet
-        }
-    }
-    
-    // Ensure image dimensions are loaded
-    if (!img.width || !img.height) return;
-
-    // On mobile, only resize when the screen width changes (rotation), ignoring vertical address bar height changes to prevent scroll flicker!
-    const widthChanged = Math.abs(window.innerWidth - lastWidth) > 20; 
-    if (lastWidth === 0 || widthChanged) {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        lastWidth = window.innerWidth;
-    }
-
-    // Centered cover scaling calculation (fully covers the entire screen, leaving no empty space below!)
-    const hRatio = canvas.width / img.width;
-    const vRatio = canvas.height / img.height;
-    const ratio = Math.max(hRatio, vRatio); // COVER ratio
-    
-    // Maintain a clean, crisp fit
-    const scale = 1.0;
-    const finalRatio = ratio * scale;
-
-    const width = img.width * finalRatio;
-    const height = img.height * finalRatio;
-    const x = (canvas.width - width) / 2;
-    const y = (canvas.height - height) / 2;
-
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    context.drawImage(img, x, y, width, height);
-}
-
-function handleWatchScroll() {
-    if (activePageId !== "home") return; // disable overhead on other pages
-
-    const scrollTrack = document.getElementById("home-scroll-track");
-    if (!scrollTrack) return;
-    
-    const trackRect = scrollTrack.getBoundingClientRect();
-    const trackHeight = scrollTrack.offsetHeight;
-    const windowHeight = window.innerHeight;
-    
-    // Calculate raw scroll progress inside the home-scroll-track sticky box
-    const totalScrollable = trackHeight - windowHeight;
-    const currentScroll = -trackRect.top;
-    
-    let progress = totalScrollable > 0 ? currentScroll / totalScrollable : 0;
-    progress = Math.max(0, Math.min(1, progress)); // clamp 0 to 1
-
-    // Map progress linearly to the 128 images frame index (0 to 127)
-    const frameIndex = Math.min(
-        frameCount - 1,
-        Math.floor(progress * frameCount)
-    );
-
-    // Render WebP image frame inside canvas
-    requestAnimationFrame(() => {
-        drawFrame(frameIndex);
-    });
-
-    // Elegant multi-caption trigger transitions based on scroll milestones
-    const cap1 = document.getElementById("caption-1");
-    const cap2 = document.getElementById("caption-2");
-    const cap3 = document.getElementById("caption-3");
-    
-    if (!cap1 || !cap2 || !cap3) return;
-
-    // Caption 1: active from progress 0.0 to 0.25
-    if (progress >= 0.0 && progress <= 0.25) {
-        cap1.classList.add("active");
-    } else {
-        cap1.classList.remove("active");
-    }
-
-    // Caption 2: active from progress 0.38 to 0.62
-    if (progress >= 0.38 && progress <= 0.62) {
-        cap2.classList.add("active");
-    } else {
-        cap2.classList.remove("active");
-    }
-
-    // Caption 3: active from progress 0.75 to 1.0 (never fades out to blank space at bottom!)
-    if (progress >= 0.75 && progress <= 1.0) {
-        cap3.classList.add("active");
-    } else {
-        cap3.classList.remove("active");
-    }
-}
 
 
 /* ==========================================================================

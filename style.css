@@ -388,123 +388,159 @@ button, input, select, textarea {
    6. Page 1: Home Page & Exploded Watch Animation
    ========================================================================== */
 
-/* The outer scroll track container that defines scroll length for canvas frames */
-.scroll-track {
+/* Stunning Atmospheric Video Hero Section */
+.hero-video-container {
     position: relative;
     width: 100%;
-    height: 320vh; /* scroll depth */
-    background-color: var(--bg-primary);
-}
-
-/* The fixed overlay within scroll track that anchors full viewport canvas + text captions */
-.hero-sticky-container {
-    position: sticky;
-    top: 0;
-    width: 100%;
     height: 100vh;
-    overflow: hidden;
+    min-height: 600px;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
+    background-color: var(--bg-primary);
 }
 
-/* Center Responsive Canvas Background */
-#hero-canvas {
+.hero-video-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+    opacity: 0.38; /* Soft atmospheric blend with deep luxury background */
+    filter: brightness(0.65) contrast(1.1) saturate(0.75);
+    z-index: 1;
+}
+
+.hero-video-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    z-index: 1;
-    pointer-events: none;
-}
-
-/* Floating Captions Overlay on top of canvas background */
-.hero-captions-overlay {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    max-width: 1600px;
-    margin: 0 auto;
-    padding: 0 80px;
+    background: linear-gradient(to bottom, 
+        rgba(10, 10, 12, 0.4) 0%, 
+        rgba(10, 10, 12, 0.65) 50%, 
+        rgba(10, 10, 12, 0.95) 100%
+    );
     z-index: 2;
     pointer-events: none;
 }
 
-/* Scroll captions base styling */
-.scroll-caption {
-    position: absolute;
-    top: 30vh;
-    max-width: 520px;
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-    pointer-events: none;
+.hero-content {
+    position: relative;
+    max-width: 900px;
+    padding: 0 40px;
+    text-align: center;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.scroll-caption.active {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: all;
+.hero-eyebrow {
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 6px;
+    color: var(--accent-gold);
+    text-transform: uppercase;
+    margin-bottom: 25px;
+    text-shadow: 0 0 15px rgba(212, 175, 55, 0.35);
 }
 
-.scroll-caption.left-caption {
-    left: 80px;
-    text-align: left;
+.hero-main-title {
+    font-family: var(--font-heading);
+    font-size: 4.8rem;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.1;
+    margin-bottom: 25px;
+    letter-spacing: -1px;
 }
 
-.scroll-caption.right-caption {
-    right: 80px;
-    text-align: right;
+.hero-tagline {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    font-weight: 300;
+    line-height: 1.8;
+    margin-bottom: 45px;
+    max-width: 680px;
 }
 
-/* Captions typography elements */
-.caption-eyebrow {
-    font-family: var(--font-ui);
+.hero-actions {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border: 1.5px solid var(--border-light);
+    color: #ffffff;
+    padding: 14px 28px;
     font-size: 0.8rem;
     font-weight: 600;
-    letter-spacing: 4px;
-    color: var(--accent-gold);
-    display: block;
-    margin-bottom: 20px;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.85); /* Drop shadow for high-contrast legibility */
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: var(--transition-micro);
 }
 
-.caption-title {
-    font-size: 4rem;
-    font-weight: 300;
-    line-height: 1.1;
-    letter-spacing: -1px;
-    margin-bottom: 30px;
-    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.95), 0 0 30px rgba(0, 0, 0, 0.5); /* Deep horology backdrop shadow */
+.btn-secondary:hover {
+    border-color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
 }
 
-.caption-lead {
-    font-size: 1.05rem;
-    color: #f5f5f7; /* High-brightness off-white instead of dark grey */
-    line-height: 1.7;
-    font-weight: 300;
-    margin-bottom: 45px;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95), 0 1px 4px rgba(0, 0, 0, 0.95); /* Ultimate contrast outline */
-}
-
-/* Scroll indicator animation inside captions */
-.scroll-indicator-container {
+.hero-scroll-indicator {
+    position: absolute;
+    bottom: 40px;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 15px;
-    opacity: 0.85;
+    gap: 12px;
+    opacity: 0.75;
+    z-index: 3;
 }
 
-.scroll-caption.right-caption .scroll-indicator-container {
-    justify-content: flex-end;
+.scroll-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-secondary);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+/* Luxury Fade-In Animations for Hero Entrance */
+.animate-fade-in-up {
+    opacity: 0;
+    transform: translateY(25px);
+    animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.delay-1 { animation-delay: 0.2s; }
+.delay-2 { animation-delay: 0.4s; }
+.delay-3 { animation-delay: 0.6s; }
+.delay-4 { animation-delay: 0.8s; }
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .mouse-icon {
     width: 22px;
     height: 36px;
-    border: 1px solid #ffffff; /* Brightened border */
+    border: 1px solid #ffffff;
     border-radius: 12px;
     position: relative;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
@@ -520,14 +556,6 @@ button, input, select, textarea {
     left: 50%;
     transform: translateX(-50%);
     animation: mouse-scroll 1.6s ease-in-out infinite;
-}
-
-.scroll-text {
-    font-size: 0.75rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #ffffff; /* Brightened for robust reading */
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
 }
 
 @keyframes mouse-scroll {
@@ -2356,46 +2384,27 @@ button, input, select, textarea {
         gap: 20px;
     }
     
-    .scroll-track {
-        height: 250vh !important; /* smooth responsive mobile scroll track */
+    .hero-main-title {
+        font-size: 2.8rem !important;
+        margin-bottom: 20px !important;
     }
-    
-    .hero-sticky-container {
-        position: sticky !important;
-        top: 0 !important;
-        height: 100vh !important;
+
+    .hero-tagline {
+        font-size: 1rem !important;
+        margin-bottom: 30px !important;
+        line-height: 1.7 !important;
+    }
+
+    .hero-actions {
+        flex-direction: column !important;
         width: 100% !important;
-        overflow: hidden !important;
+        gap: 15px !important;
     }
 
-    .scroll-caption {
-        top: 55% !important; /* push captions to bottom half to leave top half clear for the canvas watch */
-        left: 5% !important;
-        right: 5% !important;
-        width: 90% !important;
-        max-width: 100% !important;
-        text-align: center !important;
-    }
-
-    .scroll-caption.left-caption, .scroll-caption.right-caption {
-        left: 5% !important;
-        right: 5% !important;
-    }
-
-    .caption-title {
-        font-size: 2.3rem !important; /* scale text down for portrait phone screens */
-        line-height: 1.15 !important;
-        margin-bottom: 15px !important;
-    }
-
-    .caption-lead {
-        font-size: 0.9rem !important;
-        line-height: 1.6 !important;
-        margin-bottom: 25px !important;
-    }
-
-    .scroll-indicator-container {
-        justify-content: center !important;
+    .hero-actions .btn-primary, .hero-actions .btn-secondary {
+        width: 100% !important;
+        max-width: 280px !important;
+        box-sizing: border-box !important;
     }
     
     .registry-banner {

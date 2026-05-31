@@ -58,51 +58,40 @@
     <main class="page-container">
 
         <!-- ================= PAGE 1: HOME ================= -->
-        <section id="home" class="spa-page active">            <!-- Scroll Track for Canvas Image Sequence Animation -->
-            <div class="scroll-track" id="home-scroll-track">
-                <div class="hero-sticky-container">
-                    
-                    <!-- Center Responsive Canvas Background -->
-                    <canvas id="hero-canvas"></canvas>
-                    
-                    <!-- Floating text captions overlay -->
-                    <div class="hero-captions-overlay">
-                        
-                        <!-- Caption 1: Time, Deconstructed -->
-                        <div class="scroll-caption left-caption" id="caption-1">
-                            <span class="caption-eyebrow">AETERNA GENÈVE</span>
-                            <h2 class="caption-title">Time,<br><span class="accent-glow">Deconstructed.</span></h2>
-                            <p class="caption-lead">
-                                An open-heart mechanical masterwork. Witness consecutive frames of architectural watchmaking deconstruction on scroll.
-                            </p>
-                            <div class="scroll-indicator-container">
-                                <div class="mouse-icon">
-                                    <div class="mouse-wheel"></div>
-                                </div>
-                                <span class="scroll-text">Scroll to Explore</span>
-                            </div>
-                        </div>
-
-                        <!-- Caption 2: Forged Carbon and Titanium Bezel -->
-                        <div class="scroll-caption right-caption" id="caption-2">
-                            <span class="caption-eyebrow">METAMORPHIC METALLURGY</span>
-                            <h2 class="caption-title">Forged Titanium<br>& Carbon.</h2>
-                            <p class="caption-lead">
-                                Sculpted out of Grade 5 titanium blocks, sandblasted and assembled with high-performance matte carbon bezels to last generations.
-                            </p>
-                        </div>
-
-                        <!-- Caption 3: Caliber 9000 & Double mainspring barrels -->
-                        <div class="scroll-caption left-caption" id="caption-3">
-                            <span class="caption-eyebrow">ANCESTRAL HOROLOGY</span>
-                            <h2 class="caption-title">Built for the<br><span class="accent-glow">Infinite.</span></h2>
-                            <p class="caption-lead">
-                                Each bridge, spring, and ruby pivot is micro-beveled and hand-calibrated in Switzerland, engineered to operate flawlessly for centuries.
-                            </p>
-                        </div>
-
+        <section id="home" class="spa-page active">
+            <!-- Stunning Atmospheric Video Hero Section -->
+            <div class="hero-video-container">
+                <video autoplay loop muted playsinline class="hero-video-bg" id="hero-bg-video">
+                    <source src="AETERNA_watch_components_scattered_202605310249.mp4" type="video/mp4">
+                </video>
+                <div class="hero-video-overlay"></div>
+                
+                <!-- Hero Content Overlay -->
+                <div class="hero-content">
+                    <span class="hero-eyebrow animate-fade-in-up">AETERNA GENÈVE</span>
+                    <h1 class="hero-main-title animate-fade-in-up delay-1">Time, <span class="accent-glow">Deconstructed.</span></h1>
+                    <p class="hero-tagline animate-fade-in-up delay-2">
+                        An architectural tribute to horological purity. Hand-crafted in Geneva, sculpted from metamorphic alloys, and engineered to operate flawlessly for centuries.
+                    </p>
+                    <div class="hero-actions animate-fade-in-up delay-3">
+                        <a href="#collection" class="btn-primary">
+                            <span>Explore The Atelier</span>
+                            <svg class="btn-arrow" viewBox="0 0 24 24" width="16" height="16">
+                                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                            </svg>
+                        </a>
+                        <a href="#heritage" class="btn-secondary">
+                            <span>Our Philosophy</span>
+                        </a>
                     </div>
-
+                    
+                    <!-- Premium Scroll Indicator -->
+                    <div class="hero-scroll-indicator animate-fade-in-up delay-4">
+                        <div class="mouse-icon">
+                            <div class="mouse-wheel"></div>
+                        </div>
+                        <span class="scroll-label">Explore Caliber Architecture</span>
+                    </div>
                 </div>
             </div>
 
