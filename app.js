@@ -94,35 +94,69 @@ for (let i = 0; i < totalSequenceFrames; i += frameStep) {
 }
 const frameCount = frameIndices.length; // e.g. 43 frames on mobile, 128 on desktop
 
+// Initialize all image objects immediately and flag them as not loaded
+for (let i = 0; i < frameCount; i++) {
+    const img = new Image();
+    img.loaded = false;
+    images.push(img);
+}
+
 function preloadSequenceFrames(callback) {
     const bar = document.getElementById("loader-bar");
     
-    for (let i = 0; i < frameCount; i++) {
-        const img = new Image();
+    // 1. Load the first key frame immediately to unlock the page in under 100ms!
+    const firstImg = images[0];
+    const firstFrameNum = frameIndices[0];
+    
+    firstImg.onload = () => {
+        firstImg.loaded = true;
+        loadedCount = 1;
+        
+        if (bar) {
+            bar.style.width = "100%"; // set loading bar to full instantly
+        }
+        
+        // Render first frame immediately
+        drawFrame(0);
+        
+        // Fade out loader immediately so the site is instantly active and usable!
+        callback();
+        
+        // 2. Begin progressive loading of remaining frames in the background!
+        loadRemainingFramesProgressively();
+    };
+    
+    firstImg.onerror = () => {
+        console.error("AETERNA preloader: Failed to load initial frame image.");
+        loadedCount = 1;
+        callback();
+        loadRemainingFramesProgressively();
+    };
+    
+    firstImg.src = `webp2/ezgif-frame-${firstFrameNum.toString().padStart(3, '0')}.webp`;
+}
+
+function loadRemainingFramesProgressively() {
+    // Progressively load all remaining frames in parallel background processes
+    for (let i = 1; i < frameCount; i++) {
+        const img = images[i];
         const frameNum = frameIndices[i];
         
         img.onload = () => {
+            img.loaded = true;
             loadedCount++;
-            const percent = Math.round((loadedCount / frameCount) * 100);
             
-            if (bar) {
-                bar.style.width = `${percent}%`;
-            }
-            
-            if (loadedCount === frameCount) {
-                callback();
+            // If the user has scrolled or is browsing on the home page, redraw canvas
+            if (activePageId === "home") {
+                handleWatchScroll();
             }
         };
         
         img.onerror = () => {
-            console.error(`AETERNA preloader: Failed to load frame image at webp2/ezgif-frame-${frameNum.toString().padStart(3, '0')}.webp`);
-            loadedCount++;
-            if (loadedCount === frameCount) {
-                callback();
-            }
+            console.warn(`AETERNA progressive preloader: Failed to load background frame at webp2/ezgif-frame-${frameNum.toString().padStart(3, '0')}.webp`);
+            img.loaded = false;
         };
         
-        images.push(img);
         img.src = `webp2/ezgif-frame-${frameNum.toString().padStart(3, '0')}.webp`;
     }
 }
@@ -276,8 +310,31 @@ function drawFrame(index) {
     if (!canvas) return;
     const context = canvas.getContext("2d");
     
-    const img = images[index];
+    // Check if targeted frame is loaded, else find the closest loaded frame to draw
+    let img = images[index];
     if (!img) return;
+
+    if (!img.loaded) {
+        let closestIndex = -1;
+        let minDiff = Infinity;
+        for (let i = 0; i < frameCount; i++) {
+            if (images[i] && images[i].loaded) {
+                const diff = Math.abs(i - index);
+                if (diff < minDiff) {
+                    minDiff = diff;
+                    closestIndex = i;
+                }
+            }
+        }
+        if (closestIndex !== -1) {
+            img = images[closestIndex];
+        } else {
+            return; // no images loaded yet
+        }
+    }
+    
+    // Ensure image dimensions are loaded
+    if (!img.width || !img.height) return;
 
     // On mobile, only resize when the screen width changes (rotation), ignoring vertical address bar height changes to prevent scroll flicker!
     const widthChanged = Math.abs(window.innerWidth - lastWidth) > 20; 
