@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AETERNA | Luxury Swiss Timepieces | Time, Deconstructed</title>
+    <meta name="description" content="Experience AETERNA, where Swiss horological heritage meets futuristic mechanical artistry. Explore our luxury watch collection, technical engineering, and bespoke inquiries.">
+    <!-- Google Fonts: Playfair Display & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Premium Loader -->
+    <div class="loader-overlay" id="loader">
+        <div class="loader-content">
+            <h1 class="loader-brand">AETERNA</h1>
+            <div class="loader-bar-container">
+                <div class="loader-bar" id="loader-bar"></div>
+            </div>
+            <p class="loader-text">GENÈVE</p>
+        </div>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="global-header">
+        <nav class="nav-container">
+            <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            
+            <div class="nav-logo">
+                <a href="#home" class="logo-text">AETERNA</a>
+            </div>
+
+            <!-- Responsive Wrapper grouping all options for mobile menus while preserving desktop center logo alignment -->
+            <div class="nav-links-wrapper" id="nav-links-wrapper">
+                <div class="nav-links left-links">
+                    <a href="#home" class="nav-link active" data-page="home">Home</a>
+                    <a href="#heritage" class="nav-link" data-page="heritage">Heritage</a>
+                    <a href="#collection" class="nav-link" data-page="collection">Collection</a>
+                </div>
+
+                <div class="nav-links right-links">
+                    <a href="#engineering" class="nav-link" data-page="engineering">Engineering</a>
+                    <a href="#contact" class="nav-link" data-page="contact">Contact</a>
+                    <a href="#contact" class="bespoke-cta-nav" data-page="contact">Bespoke</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content Pages (Section-Based SPA) -->
+    <main class="page-container">
+
+        <!-- ================= PAGE 1: HOME ================= -->
+        <section id="home" class="spa-page active">            <!-- Scroll Track for Canvas Image Sequence Animation -->
+            <div class="scroll-track" id="home-scroll-track">
+                <div class="hero-sticky-container">
+                    
+                    <!-- Center Responsive Canvas Background -->
+                    <canvas id="hero-canvas"></canvas>
+                    
+                    <!-- Floating text captions overlay -->
+                    <div class="hero-captions-overlay">
+                        
+                        <!-- Caption 1: Time, Deconstructed -->
+                        <div class="scroll-caption left-caption" id="caption-1">
+                            <span class="caption-eyebrow">AETERNA GENÈVE</span>
+                            <h2 class="caption-title">Time,<br><span class="accent-glow">Deconstructed.</span></h2>
+                            <p class="caption-lead">
+                                An open-heart mechanical masterwork. Witness consecutive frames of architectural watchmaking deconstruction on scroll.
+                            </p>
+                            <div class="scroll-indicator-container">
+                                <div class="mouse-icon">
+                                    <div class="mouse-wheel"></div>
+                                </div>
+                                <span class="scroll-text">Scroll to Explore</span>
+                            </div>
+                        </div>
+
+                        <!-- Caption 2: Forged Carbon and Titanium Bezel -->
+                        <div class="scroll-caption right-caption" id="caption-2">
+                            <span class="caption-eyebrow">METAMORPHIC METALLURGY</span>
+                            <h2 class="caption-title">Forged Titanium<br>& Carbon.</h2>
+                            <p class="caption-lead">
+                                Sculpted out of Grade 5 titanium blocks, sandblasted and assembled with high-performance matte carbon bezels to last generations.
+                            </p>
+                        </div>
+
+                        <!-- Caption 3: Caliber 9000 & Double mainspring barrels -->
+                        <div class="scroll-caption left-caption" id="caption-3">
+                            <span class="caption-eyebrow">ANCESTRAL HOROLOGY</span>
+                            <h2 class="caption-title">Built for the<br><span class="accent-glow">Infinite.</span></h2>
+                            <p class="caption-lead">
+                                Each bridge, spring, and ruby pivot is micro-beveled and hand-calibrated in Switzerland, engineered to operate flawlessly for centuries.
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Page 1.2: Below Hero / Cinematic Intro Section -->
+            <div class="home-intro-section">
+                <div class="container-narrow">
+                    <span class="intro-eyebrow">A TEMPORAL MASTERPIECE</span>
+                    <h2 class="intro-headline">Crafted For The Few Who Appreciate The Infinite.</h2>
+                    <p class="intro-paragraph">
+                        AETERNA does not merely track hours; we celebrate the architecture of the second. Every bezel is hand-carved in Swiss ateliers, housing calibers designed to operate flawlessly for centuries. Through the synthesis of extreme aerospace materials and classical skeleton watchmaking, we create timepieces that are built to outlast generations.
+                    </p>
+                    <div class="intro-cta-wrapper">
+                        <a href="#heritage" class="btn-primary">
+                            <span>Explore Our Heritage</span>
+                            <svg class="btn-arrow" viewBox="0 0 24 24" width="16" height="16">
+                                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- [EXPANSION] Page 1.3: The Triad of Craftsmanship Pillars -->
+            <div class="home-pillars-section">
+                <div class="container">
+                    <div class="section-header-centered">
+                        <span class="section-tag">AETERNA DESIGN DOCTRINE</span>
+                        <h2 class="section-title-large">The Triad of Craftsmanship</h2>
+                        <p class="section-lead-centered">Our horological philosophy is balanced upon three non-negotiable structural pillars.</p>
+                    </div>
+
+                    <div class="pillars-grid">
+                        <!-- Pillar 1 -->
+                        <div class="pillar-card">
+                            <div class="pillar-icon-box">I</div>
+                            <h3 class="pillar-card-title">Mechanical Purity</h3>
+                            <p class="pillar-card-text">
+                                We believe skeletonization is the ultimate test of integrity. By removing unnecessary metal, we expose the absolute kinetic truth of the mechanical caliber, rendering time completely transparent.
+                            </p>
+                        </div>
+                        <!-- Pillar 2 -->
+                        <div class="pillar-card">
+                            <div class="pillar-icon-box">II</div>
+                            <h3 class="pillar-card-title">Metamorphic Alloys</h3>
+                            <p class="pillar-card-text">
+                                We sculpt watch contours from proprietary forged Grade 5 titanium, high-gloss ceramics, and ruthenium-plated plates. Lightweight strength engineered to resist wear across centuries.
+                            </p>
+                        </div>
+                        <!-- Pillar 3 -->
+                        <div class="pillar-card">
+                            <div class="pillar-icon-box">III</div>
+                            <h3 class="pillar-card-title">Ancestral Mastery</h3>
+                            <p class="pillar-card-text">
+                                High technology meets centuries-old Swiss mastery. Every bridge, spring, and gear cog is micro-beveled, sandblasted, and calibrated by hand in Geneva to tolerances of less than a micron.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- [EXPANSION] Page 1.4: Provenance Registry Section -->
+            <div class="home-registry-section">
+                <div class="container">
+                    <div class="registry-banner">
+                        <div class="registry-text-side">
+                            <span class="banner-tag">SECURED PROVENANCE</span>
+                            <h2 class="banner-title">The AETERNA Digital Ownership Registry</h2>
+                            <p class="banner-lead">
+                                Every AETERNA timepiece is a historical asset. Upon commission validation, your allocation's unique mechanical signature is logged inside our tamper-proof, physical and digital cryptographic register in Switzerland.
+                            </p>
+                            <p class="banner-text">
+                                This guarantees absolute authenticity, secure ownership transfers, and access to lifetime mechanical restoration services. We preserve the history of your watch, forever.
+                            </p>
+                        </div>
+                        <div class="registry-graphic-side">
+                            <div class="security-seal-container">
+                                <div class="seal-outer-ring"></div>
+                                <div class="seal-inner-core">
+                                    <span class="seal-brand">AE</span>
+                                    <span class="seal-tag">GENÈVE</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= PAGE 2: HERITAGE ================= -->
+        <section id="heritage" class="spa-page">
+            <div class="heritage-hero-block">
+                <div class="container">
+                    <span class="page-eyebrow">THE BRAND LEGACY</span>
+                    <h1 class="page-title">Sovereigns of Swiss Precision</h1>
+                    <p class="page-intro">For over two centuries, AETERNA has stood as the quiet sentinel of horological evolution, crafting mechanical monuments in Switzerland.</p>
+                </div>
+            </div>
+
+            <!-- Editorial Magazine Split-Screen Grid -->
+            <div class="heritage-editorial-flow">
+                
+                <!-- Row 1: Left Image, Right Text -->
+                <div class="editorial-row">
+                    <div class="editorial-image-side scroll-animate-left">
+                        <div class="editorial-image-frame">
+                            <img src="assets/heritage_craftsmanship.png" alt="Swiss master watchmaker meticulous mechanical gear assembly" class="editorial-img">
+                            <div class="image-overlay-glow"></div>
+                        </div>
+                    </div>
+                    <div class="editorial-text-side">
+                        <span class="editorial-num">01</span>
+                        <h2 class="editorial-heading">Meticulous Hands, Unyielding Focus</h2>
+                        <p class="editorial-body">
+                            Our watchmaking is an act of pure dedication. In our Geneva ateliers, master horologists spend months assembling a single Caliber 9000. Each component—some smaller than a speck of dust—is polished, micro-beveled, and balanced by hand under deep magnification.
+                        </p>
+                        <p class="editorial-body">
+                            This relentless human touch guarantees that every AETERNA chronometer functions not just as an instrument of measurement, but as a living pulse on its wearer's wrist.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Row 2: Right Image, Left Text -->
+                <div class="editorial-row reverse">
+                    <div class="editorial-image-side scroll-animate-right">
+                        <div class="editorial-image-frame">
+                            <img src="assets/engineering_blueprint.png" alt="Technical mechanical engineering watch blueprint" class="editorial-img">
+                            <div class="image-overlay-glow"></div>
+                        </div>
+                    </div>
+                    <div class="editorial-text-side">
+                        <span class="editorial-num">02</span>
+                        <h2 class="editorial-heading">An Open-Heart Philosophy</h2>
+                        <p class="editorial-body">
+                            Unlike traditional luxury brands that conceal their mechanics behind solid dials, AETERNA pioneered the "open-heart deconstructed dial". We believe the intricate architecture of movement is the ultimate form of art.
+                        </p>
+                        <p class="editorial-body">
+                            By exposing the oscillating balance wheel, rotating barrels, and ruby pivots, we establish an intimate connection between the wearer and the physical flow of time.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- [EXPANSION] Page 2.3: Historical Epochs Timeline -->
+            <div class="heritage-timeline-section">
+                <div class="container">
+                    <div class="section-header-centered">
+                        <span class="section-tag">CHRONOLOGY OF INNOVATION</span>
+                        <h2 class="section-title-large">Epochs of Swiss Precision</h2>
+                        <p class="section-lead-centered">Over two centuries of breaking architectural limits in classical watchmaking.</p>
+                    </div>
+
+                    <div class="timeline-vertical-flow">
+                        <!-- Timeline Line -->
+                        <div class="timeline-spine"></div>
+
+                        <!-- Epoch 1 -->
+                        <div class="timeline-node-container">
+                            <div class="timeline-node-marker"></div>
+                            <div class="timeline-node-card scroll-animate-left">
+                                <span class="timeline-year">1792</span>
+                                <h3 class="timeline-node-title">The Geneva Foundation</h3>
+                                <p class="timeline-node-text">
+                                    Jean-Marc Aeterna establishes his independent cabinotier atelier in Geneva, drafting custom escapements for European sovereigns, laying down the groundwork of hand-calibrated mechanical accuracy.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Epoch 2 -->
+                        <div class="timeline-node-container reverse">
+                            <div class="timeline-node-marker"></div>
+                            <div class="timeline-node-card scroll-animate-right">
+                                <span class="timeline-year">1854</span>
+                                <h3 class="timeline-node-title">The First Open-Heart Cutout</h3>
+                                <p class="timeline-node-text">
+                                    Defying contemporary watch trends of hidden dials, AETERNA launches a custom pocket chronometer featuring a circular aperture through the gold dial plate to put the raw hairspring rotation on display.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Epoch 3 -->
+                        <div class="timeline-node-container">
+                            <div class="timeline-node-marker"></div>
+                            <div class="timeline-node-card scroll-animate-left">
+                                <span class="timeline-year">1932</span>
+                                <h3 class="timeline-node-title">The Twin-Barrel Patent</h3>
+                                <p class="timeline-node-text">
+                                    AETERNA registers a landmark horological patent for a synchronized double-barrel mainspring system in series, providing a massive 72-hour continuous power reserve to wristwatch calibers.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Epoch 4 -->
+                        <div class="timeline-node-container reverse">
+                            <div class="timeline-node-marker"></div>
+                            <div class="timeline-node-card scroll-animate-right">
+                                <span class="timeline-year">2026</span>
+                                <h3 class="timeline-node-title">The Titanium Caliber 9000</h3>
+                                <p class="timeline-node-text">
+                                    Introducing forged titanium contours, carbon fiber bezels, and ruthenium-plated structural plates. The Caliber 9000 unites ancestral hand-beveling artistry with the absolute zenith of modern metallurgy.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= PAGE 3: COLLECTION ================= -->
+        <section id="collection" class="spa-page">
+            <div class="collection-header-block">
+                <div class="container">
+                    <span class="page-eyebrow">THE ATELIER CURATIONS</span>
+                    <h1 class="page-title">The Three Pillars</h1>
+                    <p class="page-intro">Explore our signature series, representing three distinct executions of deconstructed high-end horology.</p>
+                </div>
+            </div>
+
+            <div class="container">
+                <!-- 3-Column Luxury Catalog Grid -->
+                <div class="collection-grid">
+                    
+                    <!-- Card 1: The Chrono -->
+                    <div class="collection-card" data-watch="chrono">
+                        <div class="card-image-box">
+                            <img src="assets/chrono_watch.png" alt="AETERNA The Chrono Luxury Chronograph Watch" class="card-img">
+                            <div class="card-hover-overlay">
+                                <span class="overlay-button">Explore Specs</span>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <span class="card-tag">LIMITED RUN / 50</span>
+                            <h3 class="card-name">The Chrono</h3>
+                            <p class="card-description">Champagne gold accents with a brushed stainless triple register chronometer.</p>
+                            <div class="card-footer-details">
+                                <span class="card-price">$45,000 USD</span>
+                                <a href="#collection" class="view-details-link" onclick="openWatchModal('chrono')">
+                                    <span>View Details</span>
+                                    <svg viewBox="0 0 24 24" width="12" height="12" class="gold-arrow-svg">
+                                        <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: The Minimalist -->
+                    <div class="collection-card" data-watch="minimalist">
+                        <div class="card-image-box">
+                            <img src="assets/minimalist_watch.png" alt="AETERNA The Minimalist Sleek Luxury Dress Watch" class="card-img">
+                            <div class="card-hover-overlay">
+                                <span class="overlay-button">Explore Specs</span>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <span class="card-tag">CLASSIC EDITION</span>
+                            <h3 class="card-name">The Minimalist</h3>
+                            <p class="card-description">Polished bezel enclosing an ultra-slim champagne open-heart layout.</p>
+                            <div class="card-footer-details">
+                                <span class="card-price">$38,000 USD</span>
+                                <a href="#collection" class="view-details-link" onclick="openWatchModal('minimalist')">
+                                    <span>View Details</span>
+                                    <svg viewBox="0 0 24 24" width="12" height="12" class="gold-arrow-svg">
+                                        <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: The Stealth -->
+                    <div class="collection-card" data-watch="stealth">
+                        <div class="card-image-box">
+                            <img src="assets/stealth_watch.png" alt="AETERNA The Stealth Dark Matte Black Luxury Tactical Watch" class="card-img">
+                            <div class="card-hover-overlay">
+                                <span class="overlay-button">Explore Specs</span>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <span class="card-tag">TITANIUM STEALTH</span>
+                            <h3 class="card-name">The Stealth</h3>
+                            <p class="card-description">Forged matte black carbon and titanium chassis with gold ticking hands.</p>
+                            <div class="card-footer-details">
+                                <span class="card-price">$52,000 USD</span>
+                                <a href="#collection" class="view-details-link" onclick="openWatchModal('stealth')">
+                                    <span>View Details</span>
+                                    <svg viewBox="0 0 24 24" width="12" height="12" class="gold-arrow-svg">
+                                        <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- [EXPANSION] Page 3.3: Interactive Custom Atelier Configurator Previewer -->
+            <div class="atelier-builder-section">
+                <div class="container">
+                    <div class="section-header-centered">
+                        <span class="section-tag">BESPOKE CUSTOMIZATION</span>
+                        <h2 class="section-title-large">Interactive Atelier Previewer</h2>
+                        <p class="section-lead-centered">Configure a mock luxury combination of our premium structural components.</p>
+                    </div>
+
+                    <div class="configurator-wrapper">
+                        <!-- Left Preview Side -->
+                        <div class="config-preview-panel">
+                            <div class="config-visual-holder">
+                                <!-- Blueprint style lines framing the preview -->
+                                <div class="config-grid-glow"></div>
+                                <div class="config-dial-plate" id="preview-dial-plate">
+                                    <div class="config-core-gears">⚙️</div>
+                                </div>
+                                <div class="config-strap-left" id="preview-strap-top"></div>
+                                <div class="config-strap-right" id="preview-strap-bottom"></div>
+                            </div>
+                            <div class="config-active-status">
+                                <span class="status-heading">Active Profile:</span>
+                                <span class="status-summary" id="config-summary-text">The Minimalist Base with Titanium Mesh strap and Gold Crown accent.</span>
+                            </div>
+                        </div>
+
+                        <!-- Right Settings Side -->
+                        <div class="config-controls-panel">
+                            <!-- Category 1: Straps -->
+                            <div class="config-control-group">
+                                <h4 class="config-group-title">1. Strap Execution</h4>
+                                <div class="config-buttons-row">
+                                    <button class="config-btn active" data-type="strap" data-value="leather" onclick="updateConfigurator('strap', 'leather')">Alligator Leather</button>
+                                    <button class="config-btn" data-type="strap" data-value="mesh" onclick="updateConfigurator('strap', 'mesh')">Titanium Mesh</button>
+                                    <button class="config-btn" data-type="strap" data-value="rubber" onclick="updateConfigurator('strap', 'rubber')">Tactical Rubber</button>
+                                </div>
+                            </div>
+                            <!-- Category 2: Dial plate -->
+                            <div class="config-control-group">
+                                <h4 class="config-group-title">2. Dial Face Finish</h4>
+                                <div class="config-buttons-row">
+                                    <button class="config-btn active" data-type="dial" data-value="gold" onclick="updateConfigurator('dial', 'gold')">Champagne Gold</button>
+                                    <button class="config-btn" data-type="dial" data-value="ruthenium" onclick="updateConfigurator('dial', 'ruthenium')">Deep Ruthenium</button>
+                                    <button class="config-btn" data-type="dial" data-value="steel" onclick="updateConfigurator('dial', 'steel')">Brushed Steel</button>
+                                </div>
+                            </div>
+                            <!-- Category 3: Crown knob -->
+                            <div class="config-control-group">
+                                <h4 class="config-group-title">3. Crown Adjuster Accent</h4>
+                                <div class="config-buttons-row">
+                                    <button class="config-btn active" data-type="crown" data-value="gold" onclick="updateConfigurator('crown', 'gold')">Polished Gold</button>
+                                    <button class="config-btn" data-type="crown" data-value="silver" onclick="updateConfigurator('crown', 'silver')">Surgical Silver</button>
+                                    <button class="config-btn" data-type="crown" data-value="carbon" onclick="updateConfigurator('crown', 'carbon')">Matte Carbon</button>
+                                </div>
+                            </div>
+
+                            <div class="config-cta-wrapper">
+                                <a href="#contact" class="btn-primary" onclick="syncConfigToInquiry()">
+                                    <span>Lock Configuration & Apply</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Luxury Modal Overlay for "View Details" micro-interaction -->
+            <div class="modal-overlay" id="watch-modal">
+                <div class="modal-card">
+                    <button class="modal-close" onclick="closeWatchModal()">&times;</button>
+                    <div class="modal-grid">
+                        <div class="modal-image-side">
+                            <img src="" alt="" id="modal-watch-img" class="modal-watch-large">
+                            <div class="modal-glow-back"></div>
+                        </div>
+                        <div class="modal-text-side">
+                            <span class="modal-eyebrow" id="modal-watch-tag"></span>
+                            <h2 class="modal-title" id="modal-watch-name"></h2>
+                            <p class="modal-price" id="modal-watch-price"></p>
+                            <p class="modal-description" id="modal-watch-desc"></p>
+                            
+                            <h4 class="modal-subheading">Technical Features</h4>
+                            <ul class="modal-feature-list" id="modal-watch-features">
+                                <!-- Loaded dynamically in app.js -->
+                            </ul>
+
+                            <div class="modal-actions">
+                                <a href="#contact" class="btn-primary" onclick="closeWatchModal()">
+                                    <span>Initiate Bespoke Order</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= PAGE 4: ENGINEERING ================= -->
+        <section id="engineering" class="spa-page">
+            <div class="engineering-header-block">
+                <div class="container">
+                    <span class="page-eyebrow">HOROLOGY & MECHANICS</span>
+                    <h1 class="page-title">Engineering Excellence</h1>
+                    <p class="page-intro">Interact with our architectural caliber layout to explore technical specifications and components.</p>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="engineering-grid">
+                    
+                    <!-- Left Side: Blueprint Interactive Viewer -->
+                    <div class="blueprint-side">
+                        <div class="blueprint-viewer">
+                            <!-- Background Blueprint Grid -->
+                            <div class="blueprint-grid-lines"></div>
+                            
+                            <!-- Static high-resolution blueprint image -->
+                            <img src="assets/engineering_blueprint.png" alt="AETERNA Caliber 9000 mechanical movement structural engineering wireframe blueprint" class="blueprint-image" id="blueprint-base-img">
+                            
+                            <!-- Active SVG Highlights Overlay for click micro-interactions -->
+                            <svg class="blueprint-overlay-svg" viewBox="0 0 500 500">
+                                <!-- Highlighting circular rings synced with spec-rows -->
+                                <circle cx="250" cy="250" r="182" class="blueprint-highlight" id="highlight-chassis" />
+                                <circle cx="250" cy="250" r="162" class="blueprint-highlight" id="highlight-dial" />
+                                <circle cx="250" cy="250" r="85" class="blueprint-highlight" id="highlight-caliber" />
+                                <circle cx="190" cy="310" r="50" class="blueprint-highlight" id="highlight-reserve" />
+                                <circle cx="250" cy="250" r="170" class="blueprint-highlight" id="highlight-jewels" />
+                                <circle cx="250" cy="250" r="170" class="blueprint-highlight" id="highlight-water" />
+                            </svg>
+
+                            <div class="blueprint-interactive-label" id="blueprint-indicator">
+                                Hover over specifications on the right to inspect architecture.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Side: Specs Table -->
+                    <div class="specs-side">
+                        <h2 class="specs-side-title">Caliber 9000 Specifications</h2>
+                        <p class="specs-side-intro">Our movement represents the absolute pinnacle of luxury Swiss mechanical achievement. Select a spec below to highlight the component on the structural schematic.</p>
+                        
+                        <div class="specs-table">
+                            <!-- Caliber Row -->
+                            <div class="specs-row" data-highlight="caliber">
+                                <span class="spec-label">Caliber Name</span>
+                                <span class="spec-value">AETERNA Caliber 9000 (Skeleton)</span>
+                            </div>
+                            <!-- Movement Power Reserve Row -->
+                            <div class="specs-row" data-highlight="reserve">
+                                <span class="spec-label">Power Reserve</span>
+                                <span class="spec-value">72 Hours (Double Barrel)</span>
+                            </div>
+                            <!-- Chassis / Bezel Row -->
+                            <div class="specs-row" data-highlight="chassis">
+                                <span class="spec-label">Case Material</span>
+                                <span class="spec-value">Forged Grade 5 Titanium & Gold Lip</span>
+                            </div>
+                            <!-- Open Heart Dial Row -->
+                            <div class="specs-row" data-highlight="dial">
+                                <span class="spec-label">Dial Architecture</span>
+                                <span class="spec-value">Open-Heart Deconstructed Sapphire Plate</span>
+                            </div>
+                            <!-- Jewels Row -->
+                            <div class="specs-row" data-highlight="jewels">
+                                <span class="spec-label">Jewels</span>
+                                <span class="spec-value">33 Ruby Jewels Micro-Beveled</span>
+                            </div>
+                            <!-- Water Resistance Row -->
+                            <div class="specs-row" data-highlight="water">
+                                <span class="spec-label">Water Resistance</span>
+                                <span class="spec-value">100 Meters (Screw-down Crown)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- [EXPANSION] Page 4.3: Anatomy of the Caliber Component Grid -->
+            <div class="engineering-anatomy-section">
+                <div class="container">
+                    <div class="section-header-centered">
+                        <span class="section-tag">KINETIC DECONSTRUCTION</span>
+                        <h2 class="section-title-large">Anatomy of the Caliber</h2>
+                        <p class="section-lead-centered">Every micro-component is an individual structural artwork, built to endure.</p>
+                    </div>
+
+                    <div class="anatomy-grid">
+                        <!-- Anatomy Card 1 -->
+                        <div class="anatomy-card">
+                            <span class="anatomy-num">01</span>
+                            <h3 class="anatomy-title">The Hairspring</h3>
+                            <p class="anatomy-text">
+                                Coiled under extreme microscopes using proprietary alloys, our hairspring oscillates at 28,800 vibrations per hour (4Hz), regulating mechanical impulses with micro-second accuracy.
+                            </p>
+                        </div>
+                        <!-- Anatomy Card 2 -->
+                        <div class="anatomy-card">
+                            <span class="anatomy-num">02</span>
+                            <h3 class="anatomy-title">The Twin Barrels</h3>
+                            <p class="anatomy-text">
+                                Synchronized in series, our double mainspring barrels store kinetic energy and release torque with absolute uniformity, maintaining movement precision over the entire 72-hour power window.
+                            </p>
+                        </div>
+                        <!-- Anatomy Card 3 -->
+                        <div class="anatomy-card">
+                            <span class="anatomy-num">03</span>
+                            <h3 class="anatomy-title">Ruby Escapements</h3>
+                            <p class="anatomy-text">
+                                33 synthetically forged ruby jewels are polished to a microscopic mirror sheen, serving as structural friction barriers at core pivots, reducing wear parameters to absolute zero.
+                            </p>
+                        </div>
+                        <!-- Anatomy Card 4 -->
+                        <div class="anatomy-card">
+                            <span class="anatomy-num">04</span>
+                            <h3 class="anatomy-title">Forged Titanium Lugs</h3>
+                            <p class="anatomy-text">
+                                Sculpted out of a monolithic block of sandblasted Grade 5 aerospace titanium, the lugs integrate seamlessly with the casing structures, offering lightweight comfort and unyielding security.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= PAGE 5: CONTACT & INQUIRIES ================= -->
+        <section id="contact" class="spa-page">
+            <div class="container-full">
+                <div class="contact-split-grid">
+                    
+                    <!-- Left Side: Coordinates & Boutique locations -->
+                    <div class="contact-info-side">
+                        <div class="contact-info-content">
+                            <span class="info-eyebrow">GLOBAL PRESENCE</span>
+                            <h1 class="info-title">The Ateliers & Boutiques</h1>
+                            <p class="info-lead">Private viewings are arranged strictly by appointment only. Explore our global boutique locations below.</p>
+                            
+                            <div class="boutique-list">
+                                <!-- Location 1 -->
+                                <div class="boutique-item">
+                                    <h3 class="boutique-city">Genève (Atelier Principal)</h3>
+                                    <p class="boutique-address">Rue du Rhône 42, 1204 Genève, Switzerland</p>
+                                    <p class="boutique-coordinates">46.2044° N, 6.1432° E</p>
+                                </div>
+                                <!-- Location 2 -->
+                                <div class="boutique-item">
+                                    <h3 class="boutique-city">Tokyo Boutique</h3>
+                                    <p class="boutique-address">7-Chome Ginza, Chuo City, Tokyo 104-0061, Japan</p>
+                                    <p class="boutique-coordinates">35.6718° N, 139.7650° E</p>
+                                </div>
+                                <!-- Location 3 -->
+                                <div class="boutique-item">
+                                    <h3 class="boutique-city">New York Salon</h3>
+                                    <p class="boutique-address">743 Fifth Avenue, New York, NY 10022, United States</p>
+                                    <p class="boutique-coordinates">40.7624° N, 73.9738° W</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Side: Bespoke Inquiry Form -->
+                    <div class="contact-form-side">
+                        <div class="form-content-box">
+                            <span class="form-eyebrow">INQUIRY FORM</span>
+                            <h2 class="form-title">Initiate Bespoke Commission</h2>
+                            <p class="form-intro">Due to extremely limited production capacity, AETERNA accepts commissions strictly based on component allocation. Complete the application below.</p>
+                            
+                            <form id="bespoke-inquiry-form" class="luxury-form" onsubmit="handleFormSubmit(event)">
+                                <div class="form-group">
+                                    <input type="text" id="inquirer-name" class="form-input" required placeholder=" ">
+                                    <label for="inquirer-name" class="form-label">Full Name</label>
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="email" id="inquirer-email" class="form-input" required placeholder=" ">
+                                    <label for="inquirer-email" class="form-label">Email Address</label>
+                                </div>
+
+                                <div class="form-group">
+                                    <select id="inquiry-type" class="form-input select-input" required>
+                                        <option value="" disabled selected hidden></option>
+                                        <option value="chrono">Bespoke Chrono Commission ($45,000+)</option>
+                                        <option value="minimalist">Bespoke Minimalist Commission ($38,000+)</option>
+                                        <option value="stealth">Bespoke Stealth Commission ($52,000+)</option>
+                                        <option value="private-viewing">Private Salon Viewing (Atelier Appointment)</option>
+                                    </select>
+                                    <label for="inquiry-type" class="form-label">Inquiry Interest</label>
+                                </div>
+
+                                <div class="form-group">
+                                    <textarea id="inquirer-message" class="form-input textarea-input" required placeholder=" " rows="4"></textarea>
+                                    <label for="inquirer-message" class="form-label">Bespoke Requests & Portfolio Context</label>
+                                </div>
+
+                                <div class="form-submit-box">
+                                    <button type="submit" class="btn-primary form-submit-btn">
+                                        <span>Submit Commission Inquiry</span>
+                                        <svg class="btn-arrow" viewBox="0 0 24 24" width="16" height="16">
+                                            <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </form>
+
+                            <!-- Custom Form Success Screen -->
+                            <div class="form-success-overlay" id="form-success-overlay">
+                                <div class="success-box">
+                                    <div class="success-ring">
+                                        <svg class="checkmark-svg" viewBox="0 0 52 52">
+                                            <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+                                            <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                                        </svg>
+                                    </div>
+                                    <h3 class="success-title">Application Logged</h3>
+                                    <p class="success-body">Your private allocation profile has been logged under token #<span id="allocation-token">AE-8902</span>.</p>
+                                    <p class="success-body">An AETERNA Horologist will contact your representative within 24 business hours to verify credentials.</p>
+                                    <button class="btn-secondary" onclick="resetFormState()">Done</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- [EXPANSION] Page 5.3: The Bespoke Journey Process timeline -->
+            <div class="bespoke-journey-section">
+                <div class="container">
+                    <div class="section-header-centered">
+                        <span class="section-tag">COMMISSION PATHWAYS</span>
+                        <h2 class="section-title-large">The Bespoke Commission Sequence</h2>
+                        <p class="section-lead-centered">Our workflow is meticulously organized to guarantee absolute exclusivity and structural customization.</p>
+                    </div>
+
+                    <div class="journey-timeline-grid">
+                        <!-- Step 1 -->
+                        <div class="journey-step-card">
+                            <span class="step-card-num">01</span>
+                            <h3 class="step-card-title">Allocation Request</h3>
+                            <p class="step-card-text">
+                                Log your credential portfolio via our online boutique application form or schedule an in-person salon appointment in Geneva, Tokyo, or New York.
+                            </p>
+                        </div>
+                        <!-- Step 2 -->
+                        <div class="journey-step-card">
+                            <span class="step-card-num">02</span>
+                            <h3 class="step-card-title">Quota Evaluation</h3>
+                            <p class="step-card-text">
+                                Our allocation committee reviews global regional quota distributions. Successful applicants will be issued an exclusive private commission key within 24 business hours.
+                            </p>
+                        </div>
+                        <!-- Step 3 -->
+                        <div class="journey-step-card">
+                            <span class="step-card-num">03</span>
+                            <h3 class="step-card-title">Component Design</h3>
+                            <p class="step-card-text">
+                                Partner with our master watchmakers to configure bespoke alloy structures, sapphire dial plates, hands layouts, and select tailored alligator skins.
+                            </p>
+                        </div>
+                        <!-- Step 4 -->
+                        <div class="journey-step-card">
+                            <span class="step-card-num">04</span>
+                            <h3 class="step-card-title">Geneva Assembly</h3>
+                            <p class="step-card-text">
+                                Watch your timepiece assembled layer-by-layer via a private encrypted video feed from our Geneva atelier. Calibrated, sealed, and hand-delivered globally.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Global Premium Footer -->
+    <footer class="global-footer">
+        <div class="footer-grid">
+            <div class="footer-brand-side">
+                <span class="footer-logo">AETERNA</span>
+                <p class="footer-tagline">Artistry in Perpetual Motion</p>
+                <p class="footer-atelier-coord">Geneva Atelier: 46.2044° N, 6.1432° E</p>
+            </div>
+            
+            <div class="footer-links-side">
+                <div class="footer-links-col">
+                    <h4 class="footer-heading">Navigational Paths</h4>
+                    <a href="#home" class="footer-link">Home</a>
+                    <a href="#heritage" class="footer-link">Heritage</a>
+                    <a href="#collection" class="footer-link">Collection</a>
+                </div>
+                <div class="footer-links-col">
+                    <h4 class="footer-heading">Mechanical Details</h4>
+                    <a href="#engineering" class="footer-link">Engineering Specs</a>
+                    <a href="#contact" class="footer-link">Bespoke Inquiries</a>
+                    <a href="#contact" class="footer-link">Boutique Appointments</a>
+                </div>
+                <div class="footer-links-col">
+                    <h4 class="footer-heading">Legal Horology</h4>
+                    <a href="#" class="footer-link">Warranty & Authenticity</a>
+                    <a href="#" class="footer-link">Ownership Registry</a>
+                    <a href="#" class="footer-link">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p class="copyright">&copy; 2026 AETERNA Horology SA. All rights reserved. Crafted by Antigravity Elite Systems.</p>
+            <p class="swiss-made">SWISS MADE</p>
+        </div>
+    </footer>
+
+    <!-- Javascript Logic -->
+    <script src="app.js"></script>
+</body>
+</html>

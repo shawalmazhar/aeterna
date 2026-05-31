@@ -1,0 +1,2517 @@
+/* ==========================================================================
+   AETERNA LUXURY WATCHES - DESIGN SYSTEM & STYLESHEET (EXPANDED & POLISHED)
+   ========================================================================== */
+
+/* 1. Core Tokens & Variable Definitions */
+:root {
+    --bg-primary: #0D0D0D;        /* Matte Black */
+    --bg-secondary: #141414;      /* Deep Charcoal */
+    --bg-tertiary: #1C1C1E;       /* Light Charcoal Card Base */
+    
+    --text-primary: #E5E5E5;      /* Brushed Stainless Steel Silver */
+    --text-secondary: #8E8E93;    /* Muted Silver */
+    --text-muted: #545456;        /* Dark Slate */
+    
+    --accent-gold: #D4AF37;       /* Glowing Champagne Gold */
+    --accent-gold-hover: #F3E5AB; /* Light Gold */
+    --accent-gold-dark: #8A6D0F;  /* Deep Gold */
+    --accent-gold-glow: rgba(212, 175, 55, 0.15);
+    --accent-gold-glow-intense: rgba(212, 175, 55, 0.4);
+    
+    --steel-gradient: linear-gradient(135deg, #3a3a3c 0%, #1c1c1e 100%);
+    --gold-gradient: linear-gradient(135deg, #D4AF37 0%, #8A6D0F 100%);
+    --dark-gradient: linear-gradient(180deg, #141414 0%, #0D0D0D 100%);
+    
+    --border-light: rgba(229, 229, 229, 0.1);
+    --border-gold-subtle: rgba(212, 175, 55, 0.2);
+    --border-gold-focus: rgba(212, 175, 55, 0.8);
+    
+    --glass-bg: rgba(20, 20, 20, 0.6);
+    --glass-blur: blur(20px);
+    
+    --font-heading: 'Playfair Display', Georgia, serif;
+    --font-ui: 'Inter', system-ui, -apple-system, sans-serif;
+    
+    --transition-smooth: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-micro: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* 2. Global Resets & Hardware Acceleration */
+* {
+    box-shadow: none;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    width: 100%;
+    background-color: var(--bg-primary);
+    scroll-behavior: smooth;
+}
+
+body {
+    width: 100%;
+    overflow-x: clip; /* modern standard, prevents position: sticky from breaking! */
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-ui);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Base Headings & Links styling */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    color: #ffffff;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    transition: var(--transition-micro);
+}
+
+button, input, select, textarea {
+    font-family: inherit;
+    outline: none;
+}
+
+/* Hardware accelerated layer triggers */
+.spa-page, .watch-layer, .spinning-gear, .blueprint-highlight {
+    backface-visibility: hidden;
+    perspective: 1000px;
+    will-change: transform, opacity;
+}
+
+/* Utility Containers */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+.container-narrow {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.container-full {
+    width: 100%;
+    padding: 0;
+}
+
+.accent-glow {
+    color: var(--accent-gold);
+    text-shadow: 0 0 15px var(--accent-gold-glow);
+}
+
+/* Expanded Shared Subheadings */
+.section-header-centered {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 60px auto;
+}
+
+.section-tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 4px;
+    color: var(--accent-gold);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.section-title-large {
+    font-size: 2.8rem;
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.section-lead-centered {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    font-weight: 300;
+}
+
+
+/* ==========================================================================
+   3. Loading Screen
+   ========================================================================== */
+.loader-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--bg-primary);
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.8s;
+}
+
+.loader-overlay.fade-out {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader-content {
+    text-align: center;
+}
+
+.loader-brand {
+    font-size: 3rem;
+    font-weight: 300;
+    letter-spacing: 12px;
+    margin-bottom: 20px;
+    animation: pulse-title 2.5s ease-in-out infinite;
+}
+
+.loader-bar-container {
+    width: 180px;
+    height: 1px;
+    background-color: var(--border-light);
+    margin: 0 auto 15px auto;
+    overflow: hidden;
+    position: relative;
+}
+
+.loader-bar {
+    width: 0%;
+    height: 100%;
+    background-color: var(--accent-gold);
+    transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.loader-text {
+    font-size: 0.7rem;
+    letter-spacing: 6px;
+    color: var(--text-secondary);
+}
+
+@keyframes pulse-title {
+    0%, 100% { opacity: 0.8; letter-spacing: 12px; }
+    50% { opacity: 1; letter-spacing: 14px; color: var(--accent-gold); }
+}
+
+
+/* ==========================================================================
+   4. Global Navigation Header
+   ========================================================================== */
+.global-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 90px;
+    background-color: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    border-bottom: 1px solid var(--border-light);
+    z-index: 1000;
+    transition: var(--transition-smooth);
+}
+
+.global-header.scrolled {
+    height: 70px;
+    background-color: rgba(13, 13, 13, 0.95);
+}
+
+.nav-container {
+    width: 100%;
+    max-width: 1600px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.nav-links-wrapper {
+    display: contents; /* Allows children left-links and right-links to align relative to nav-container on desktop */
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.nav-link {
+    font-family: var(--font-ui);
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-secondary);
+    position: relative;
+    padding: 10px 0;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: var(--accent-gold);
+    transition: var(--transition-micro);
+}
+
+.nav-link:hover, .nav-link.active {
+    color: #ffffff;
+}
+
+.nav-link.active::after, .nav-link:hover::after {
+    width: 100%;
+}
+
+.nav-logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.logo-text {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    font-weight: 400;
+    letter-spacing: 8px;
+    color: #ffffff;
+    transition: var(--transition-smooth);
+}
+
+.logo-text:hover {
+    color: var(--accent-gold);
+    letter-spacing: 9px;
+}
+
+.bespoke-cta-nav {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+    color: var(--accent-gold);
+    border: 1px solid var(--accent-gold-dark);
+    padding: 8px 18px;
+    border-radius: 2px;
+    transition: var(--transition-micro);
+}
+
+.bespoke-cta-nav:hover {
+    background-color: var(--accent-gold);
+    color: var(--bg-primary);
+    box-shadow: 0 0 15px var(--accent-gold-glow);
+    border-color: var(--accent-gold);
+}
+
+/* Mobile menu toggle button (Smooth X Transformation) */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1100;
+    padding: 5px;
+    width: 32px;
+    height: 32px;
+}
+
+.menu-toggle .bar {
+    width: 100%;
+    height: 2px;
+    background-color: var(--text-primary);
+    transition: var(--transition-micro);
+}
+
+.menu-toggle.active .bar:nth-child(1) {
+    transform: translateY(4px) rotate(45deg);
+    background-color: var(--accent-gold);
+}
+
+.menu-toggle.active .bar:nth-child(2) {
+    transform: translateY(-4px) rotate(-45deg);
+    background-color: var(--accent-gold);
+}
+
+
+/* ==========================================================================
+   5. SPA Section Transition Engine
+   ========================================================================== */
+.page-container {
+    width: 100%;
+    min-height: calc(100vh - 90px);
+    margin-top: 90px;
+    position: relative;
+}
+
+.spa-page {
+    display: none;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.spa-page.active {
+    display: block;
+}
+
+.spa-page.fade-in {
+    opacity: 1;
+    transform: none;
+}
+
+.spa-page.fade-out {
+    opacity: 0;
+    transform: translateY(-15px);
+}
+
+
+/* ==========================================================================
+   6. Page 1: Home Page & Exploded Watch Animation
+   ========================================================================== */
+
+/* The outer scroll track container that defines scroll length for canvas frames */
+.scroll-track {
+    position: relative;
+    width: 100%;
+    height: 320vh; /* scroll depth */
+    background-color: var(--bg-primary);
+}
+
+/* The fixed overlay within scroll track that anchors full viewport canvas + text captions */
+.hero-sticky-container {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Center Responsive Canvas Background */
+#hero-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Floating Captions Overlay on top of canvas background */
+.hero-captions-overlay {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 80px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Scroll captions base styling */
+.scroll-caption {
+    position: absolute;
+    top: 30vh;
+    max-width: 520px;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+}
+
+.scroll-caption.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+}
+
+.scroll-caption.left-caption {
+    left: 80px;
+    text-align: left;
+}
+
+.scroll-caption.right-caption {
+    right: 80px;
+    text-align: right;
+}
+
+/* Captions typography elements */
+.caption-eyebrow {
+    font-family: var(--font-ui);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 4px;
+    color: var(--accent-gold);
+    display: block;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.85); /* Drop shadow for high-contrast legibility */
+}
+
+.caption-title {
+    font-size: 4rem;
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    margin-bottom: 30px;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.95), 0 0 30px rgba(0, 0, 0, 0.5); /* Deep horology backdrop shadow */
+}
+
+.caption-lead {
+    font-size: 1.05rem;
+    color: #f5f5f7; /* High-brightness off-white instead of dark grey */
+    line-height: 1.7;
+    font-weight: 300;
+    margin-bottom: 45px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95), 0 1px 4px rgba(0, 0, 0, 0.95); /* Ultimate contrast outline */
+}
+
+/* Scroll indicator animation inside captions */
+.scroll-indicator-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    opacity: 0.85;
+}
+
+.scroll-caption.right-caption .scroll-indicator-container {
+    justify-content: flex-end;
+}
+
+.mouse-icon {
+    width: 22px;
+    height: 36px;
+    border: 1px solid #ffffff; /* Brightened border */
+    border-radius: 12px;
+    position: relative;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.mouse-wheel {
+    width: 3px;
+    height: 6px;
+    background-color: var(--accent-gold);
+    border-radius: 2px;
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: mouse-scroll 1.6s ease-in-out infinite;
+}
+
+.scroll-text {
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #ffffff; /* Brightened for robust reading */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+@keyframes mouse-scroll {
+    0% { transform: translate(-50%, 0); opacity: 1; }
+    50% { transform: translate(-50%, 8px); opacity: 0.3; }
+    100% { transform: translate(-50%, 0); opacity: 1; }
+}
+
+
+/* Page 1.2: Home Page Below-Hero Cinematic Block */
+.home-intro-section {
+    background-color: var(--bg-secondary);
+    padding: 120px 0;
+    border-top: 1px solid var(--border-light);
+    position: relative;
+    z-index: 10;
+}
+
+.intro-eyebrow {
+    font-family: var(--font-ui);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 4px;
+    color: var(--accent-gold);
+    display: block;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.intro-headline {
+    font-size: 3rem;
+    font-weight: 300;
+    line-height: 1.2;
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.intro-paragraph {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: var(--text-secondary);
+    text-align: center;
+    line-height: 1.8;
+    margin-bottom: 50px;
+}
+
+.intro-cta-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+/* [NEW STYLING] Page 1.3: Triad of Craftsmanship Pillars */
+.home-pillars-section {
+    background-color: var(--bg-primary);
+    padding: 120px 0;
+    border-top: 1px solid var(--border-light);
+    position: relative;
+    z-index: 10;
+}
+
+.pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    margin-top: 60px;
+}
+
+.pillar-card {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-light);
+    padding: 50px 40px;
+    border-radius: 2px;
+    text-align: center;
+    transition: var(--transition-smooth);
+}
+
+.pillar-card:hover {
+    border-color: var(--accent-gold-dark);
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+}
+
+.pillar-icon-box {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--accent-gold);
+    width: 60px;
+    height: 60px;
+    border: 1px solid var(--border-gold-subtle);
+    border-radius: 50%;
+    margin: 0 auto 30px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pillar-card-title {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    font-weight: 400;
+    margin-bottom: 18px;
+    color: #ffffff;
+}
+
+.pillar-card-text {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    font-weight: 300;
+}
+
+/* [NEW STYLING] Page 1.4: Provenance Registry Banner */
+.home-registry-section {
+    background-color: var(--bg-secondary);
+    padding: 120px 0;
+    border-top: 1px solid var(--border-light);
+    position: relative;
+    z-index: 10;
+}
+
+.registry-banner {
+    background: var(--dark-gradient);
+    border: 1px solid var(--accent-gold-dark);
+    padding: 60px 80px;
+    border-radius: 2px;
+    display: grid;
+    grid-template-columns: 60% 40%;
+    align-items: center;
+    gap: 60px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+}
+
+.banner-tag {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--accent-gold);
+    display: block;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.banner-title {
+    font-size: 2.4rem;
+    font-weight: 300;
+    margin-bottom: 25px;
+    line-height: 1.25;
+}
+
+.banner-lead {
+    font-size: 1.05rem;
+    color: #ffffff;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+.banner-text {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 300;
+    line-height: 1.7;
+}
+
+.registry-graphic-side {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Luxury security seal micro-animation */
+.security-seal-container {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.seal-outer-ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 1.5px dashed var(--accent-gold-dark);
+    border-radius: 50%;
+    animation: spin-clockwise 40s linear infinite;
+}
+
+.seal-inner-core {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--accent-gold);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 35px var(--accent-gold-glow);
+}
+
+.seal-brand {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: var(--accent-gold);
+    letter-spacing: 3px;
+    line-height: 1;
+    margin-bottom: 5px;
+}
+
+.seal-tag {
+    font-size: 0.6rem;
+    letter-spacing: 4px;
+    color: var(--text-secondary);
+}
+
+
+/* Premium Buttons Styling */
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    background: none;
+    color: #ffffff;
+    border: 1px solid var(--accent-gold);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+    padding: 16px 36px;
+    border-radius: 1px;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+    transition: var(--transition-micro);
+}
+
+.btn-primary span {
+    position: relative;
+    z-index: 2;
+}
+
+.btn-arrow {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    z-index: 2;
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--gold-gradient);
+    transition: var(--transition-smooth);
+    z-index: 1;
+}
+
+.btn-primary:hover {
+    color: var(--bg-primary);
+    box-shadow: 0 0 25px var(--accent-gold-glow-intense);
+    border-color: var(--accent-gold);
+}
+
+.btn-primary:hover::before {
+    left: 0;
+}
+
+.btn-primary:hover .btn-arrow {
+    transform: translateX(6px);
+}
+
+.btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    background: none;
+    color: var(--text-primary);
+    border: 1px solid var(--border-light);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+    padding: 12px 28px;
+    cursor: pointer;
+    transition: var(--transition-micro);
+}
+
+.btn-secondary:hover {
+    border-color: var(--text-primary);
+    color: #ffffff;
+}
+
+
+/* ==========================================================================
+   7. Page 2: Heritage (Editorial Layout)
+   ========================================================================== */
+.heritage-hero-block {
+    padding: 100px 0 60px 0;
+    text-align: center;
+}
+
+.page-eyebrow {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 5px;
+    color: var(--accent-gold);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.page-title {
+    font-size: 3.5rem;
+    font-weight: 300;
+    margin-bottom: 25px;
+    letter-spacing: -0.5px;
+}
+
+.page-intro {
+    font-size: 1.15rem;
+    font-weight: 300;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+/* Editorial rows */
+.heritage-editorial-flow {
+    padding: 40px 0 60px 0;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.editorial-row {
+    display: flex;
+    align-items: center;
+    padding: 60px 40px;
+    gap: 80px;
+}
+
+.editorial-row.reverse {
+    flex-direction: row-reverse;
+}
+
+.editorial-image-side {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.editorial-image-frame {
+    position: relative;
+    width: 100%;
+    max-width: 540px;
+    aspect-ratio: 1.1;
+    overflow: hidden;
+    border: 1px solid var(--border-light);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+}
+
+.editorial-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%) contrast(1.15);
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s ease;
+}
+
+.editorial-image-frame:hover .editorial-img {
+    transform: scale(1.05);
+    filter: grayscale(80%) contrast(1.1);
+}
+
+.image-overlay-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(214, 175, 55, 0.05) 0%, transparent 80%);
+    pointer-events: none;
+}
+
+.editorial-text-side {
+    flex: 1;
+    max-width: 520px;
+}
+
+.editorial-num {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-style: italic;
+    color: var(--accent-gold-dark);
+    display: block;
+    margin-bottom: 15px;
+}
+
+.editorial-heading {
+    font-size: 2.2rem;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 25px;
+}
+
+.editorial-body {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    font-weight: 300;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+/* Animations for heritage image slides on entry */
+.scroll-animate-left, .scroll-animate-right {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scroll-animate-left.triggered, .scroll-animate-right.triggered {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* [NEW STYLING] Page 2.3: Historical Innovation Vertical Timeline */
+.heritage-timeline-section {
+    background-color: var(--bg-secondary);
+    padding: 120px 0;
+    border-top: 1px solid var(--border-light);
+    position: relative;
+}
+
+.timeline-vertical-flow {
+    position: relative;
+    max-width: 900px;
+    margin: 80px auto 0 auto;
+    padding: 20px 0;
+}
+
+/* Central spine line */
+.timeline-spine {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background-color: var(--border-light);
+    transform: translateX(-50%);
+}
+
+.timeline-node-container {
+    position: relative;
+    width: 100%;
+    margin-bottom: 60px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.timeline-node-container.reverse {
+    justify-content: flex-end;
+}
+
+/* Central dot marker */
+.timeline-node-marker {
+    position: absolute;
+    left: 50%;
+    top: 30px;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background-color: var(--accent-gold);
+    border: 3px solid var(--bg-secondary);
+    transform: translateX(-50%);
+    z-index: 5;
+    box-shadow: 0 0 10px var(--accent-gold-glow-intense);
+}
+
+/* Node layout card */
+.timeline-node-card {
+    width: 44%;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-light);
+    padding: 35px;
+    border-radius: 2px;
+    position: relative;
+    transition: var(--transition-smooth);
+}
+
+.timeline-node-card:hover {
+    border-color: var(--accent-gold-dark);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    transform: translateY(-4px);
+}
+
+.timeline-year {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--accent-gold);
+    display: block;
+    margin-bottom: 12px;
+    line-height: 1;
+}
+
+.timeline-node-title {
+    font-family: var(--font-heading);
+    font-size: 1.35rem;
+    font-weight: 400;
+    margin-bottom: 15px;
+}
+
+.timeline-node-text {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-weight: 300;
+    line-height: 1.7;
+}
+
+
+/* ==========================================================================
+   8. Page 3: Collection Page (Product Catalog)
+   ========================================================================== */
+.collection-header-block {
+    padding: 100px 0 60px 0;
+    text-align: center;
+}
+
+.collection-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    padding: 40px 0 80px 0;
+}
+
+.collection-card {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-light);
+    border-radius: 2px;
+    overflow: hidden;
+    transition: var(--transition-smooth);
+    display: flex;
+    flex-direction: column;
+}
+
+.collection-card:hover {
+    border-color: var(--accent-gold-dark);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+    transform: translateY(-8px);
+}
+
+.card-image-box {
+    width: 100%;
+    aspect-ratio: 1;
+    overflow: hidden;
+    position: relative;
+    background-color: #080808;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.collection-card:hover .card-img {
+    transform: scale(1.06);
+}
+
+.card-hover-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(13, 13, 13, 0.7);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: var(--transition-micro);
+    cursor: pointer;
+}
+
+.collection-card:hover .card-hover-overlay {
+    opacity: 1;
+}
+
+.overlay-button {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent-gold);
+    border: 1px solid var(--accent-gold);
+    padding: 12px 24px;
+    font-weight: 600;
+}
+
+.card-info {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.card-tag {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--accent-gold);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 12px;
+}
+
+.card-name {
+    font-size: 1.6rem;
+    font-weight: 400;
+    margin-bottom: 12px;
+    color: #ffffff;
+}
+
+.card-description {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 300;
+    margin-bottom: 25px;
+    line-height: 1.6;
+    flex: 1;
+}
+
+.card-footer-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    border-top: 1px solid var(--border-light);
+    padding-top: 20px;
+}
+
+.card-price {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #ffffff;
+    font-family: var(--font-heading);
+    letter-spacing: 0.5px;
+}
+
+.view-details-link {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--accent-gold);
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.gold-arrow-svg {
+    transition: transform 0.3s ease;
+}
+
+.view-details-link:hover {
+    color: #ffffff;
+}
+
+.view-details-link:hover .gold-arrow-svg {
+    transform: translateX(4px);
+}
+
+
+/* [NEW STYLING] Page 3.3: Interactive Bespoke Atelier Configurator */
+.atelier-builder-section {
+    background-color: var(--bg-primary);
+    padding: 120px 0;
+    border-top: 1px solid var(--border-light);
+    position: relative;
+}
+
+.configurator-wrapper {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 60px;
+    margin-top: 60px;
+    align-items: center;
+}
+
+/* Left preview visual */
+.config-preview-panel {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-light);
+    border-radius: 2px;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+}
+
+.config-visual-holder {
+    width: 280px;
+    height: 280px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.config-grid-glow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: 14px 14px;
+    background-image: linear-gradient(to right, rgba(212,175,55,0.03) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(212,175,55,0.03) 1px, transparent 1px);
+    z-index: 1;
+}
+
+/* Customizable Strap Visuals */
+.config-strap-left, .config-strap-right {
+    position: absolute;
+    width: 80px;
+    height: 90px;
+    background-color: #0b0b0d;
+    border: 1.5px solid #222;
+    z-index: 2;
+    transition: var(--transition-smooth);
+}
+
+.config-strap-left {
+    top: 0;
+    border-bottom: none;
+    border-radius: 4px 4px 0 0;
+}
+
+.config-strap-right {
+    bottom: 0;
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+}
+
+/* Strap styling updates based on JS config */
+.config-strap-left.mesh-strap, .config-strap-right.mesh-strap {
+    background-color: #3a3a3c;
+    border-color: var(--accent-gold-dark);
+    background-image: radial-gradient(circle, rgba(212,175,55,0.15) 20%, transparent 20%);
+    background-size: 6px 6px;
+}
+
+.config-strap-left.rubber-strap, .config-strap-right.rubber-strap {
+    background-color: #050505;
+    border-color: #111;
+    background-image: linear-gradient(45deg, #111 25%, transparent 25%), linear-gradient(-45deg, #111 25%, transparent 25%);
+    background-size: 8px 8px;
+}
+
+/* Customizable Dial Face visual */
+.config-dial-plate {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #D4AF37 0%, #AA7C11 100%);
+    border: 3px stroke var(--text-primary);
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+    transition: var(--transition-smooth);
+}
+
+/* Dial styling updates based on JS config */
+.config-dial-plate.ruthenium-dial {
+    background: radial-gradient(circle, #2a2a2c 0%, #0d0d0e 100%);
+    box-shadow: 0 10px 25px var(--accent-gold-glow);
+}
+
+.config-dial-plate.steel-dial {
+    background: radial-gradient(circle, #ffffff 0%, #999999 100%);
+}
+
+.config-core-gears {
+    font-size: 2.2rem;
+    animation: spin-clockwise 10s linear infinite;
+    opacity: 0.6;
+}
+
+.config-active-status {
+    width: 100%;
+    margin-top: 40px;
+    border-top: 1px solid var(--border-light);
+    padding-top: 20px;
+    text-align: center;
+}
+
+.status-heading {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent-gold);
+    display: block;
+    margin-bottom: 5px;
+}
+
+.status-summary {
+    font-size: 0.85rem;
+    color: #ffffff;
+    font-weight: 300;
+}
+
+/* Right settings panels */
+.config-controls-panel {
+    padding-left: 20px;
+}
+
+.config-control-group {
+    margin-bottom: 35px;
+}
+
+.config-group-title {
+    font-family: var(--font-ui);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #ffffff;
+    margin-bottom: 15px;
+}
+
+.config-buttons-row {
+    display: flex;
+    gap: 15px;
+}
+
+.config-btn {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-light);
+    color: var(--text-secondary);
+    padding: 12px 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 1px;
+    cursor: pointer;
+    flex: 1;
+    transition: var(--transition-micro);
+}
+
+.config-btn:hover {
+    border-color: var(--text-primary);
+    color: #ffffff;
+}
+
+.config-btn.active {
+    border-color: var(--accent-gold);
+    color: var(--accent-gold);
+    background-color: #1a1a1c;
+    box-shadow: 0 0 10px rgba(212,175,55,0.1);
+}
+
+.config-cta-wrapper {
+    margin-top: 45px;
+}
+
+
+/* Luxury Collection Modal Overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(10, 10, 10, 0.85);
+    backdrop-filter: blur(15px);
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align to top to allow natural scrolling downward if height exceeds viewport */
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding: 80px 20px; /* Provide breathing room at top and bottom */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-card {
+    width: 90%;
+    max-width: 960px;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--accent-gold-dark);
+    border-radius: 2px;
+    position: relative;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.9);
+    transform: scale(0.95) translateY(20px);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow: hidden;
+}
+
+.modal-overlay.active .modal-card {
+    transform: scale(1) translateY(0);
+}
+
+.modal-close {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    font-size: 2rem;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    z-index: 10;
+    transition: var(--transition-micro);
+}
+
+.modal-close:hover {
+    color: #ffffff;
+}
+
+.modal-grid {
+    display: grid;
+    grid-template-columns: 48% 52%;
+}
+
+.modal-image-side {
+    position: relative;
+    background-color: #080808;
+    border-right: 1px solid var(--border-light);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1;
+}
+
+.modal-watch-large {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: relative;
+    z-index: 2;
+}
+
+.modal-glow-back {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, var(--accent-gold-glow-intense) 0%, transparent 70%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.modal-text-side {
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.modal-eyebrow {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--accent-gold);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.modal-title {
+    font-size: 2.4rem;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+
+.modal-price {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    color: #ffffff;
+    margin-bottom: 25px;
+}
+
+.modal-description {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    font-weight: 300;
+    line-height: 1.7;
+    margin-bottom: 30px;
+}
+
+.modal-subheading {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #ffffff;
+    margin-bottom: 15px;
+    font-family: var(--font-ui);
+}
+
+.modal-feature-list {
+    list-style: none;
+    margin-bottom: 35px;
+}
+
+.modal-feature-list li {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    position: relative;
+    padding-left: 15px;
+}
+
+.modal-feature-list li::before {
+    content: '▪';
+    color: var(--accent-gold);
+    position: absolute;
+    left: 0;
+    top: -2px;
+}
+
+.modal-actions {
+    display: flex;
+}
+
+
+/* ==========================================================================
+   9. Page 4: Engineering Page
+   ========================================================================== */
+.engineering-header-block {
+    padding: 100px 0 60px 0;
+    text-align: center;
+}
+
+.engineering-grid {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 60px;
+    padding: 40px 0 80px 0;
+    align-items: center;
+}
+
+/* Blueprint visual display side */
+.blueprint-side {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.blueprint-viewer {
+    width: 100%;
+    max-width: 480px;
+    aspect-ratio: 1;
+    background-color: #06080a;
+    border: 1px solid #142a3a;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
+}
+
+/* Blueprint background grid pattern styling */
+.blueprint-grid-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: 20px 20px;
+    background-image: 
+        linear-gradient(to right, rgba(20, 42, 58, 0.15) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(20, 42, 58, 0.15) 1px, transparent 1px);
+    z-index: 1;
+}
+
+.blueprint-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.65) contrast(1.1) sepia(60%) hue-rotate(185deg) saturate(160%);
+    position: relative;
+    z-index: 2;
+    transition: filter 0.5s ease;
+}
+
+/* Clicking spec rows triggers active blue highlights overlay */
+.blueprint-overlay-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    pointer-events: none;
+}
+
+/* Spec highlight SVG circles default state */
+.blueprint-highlight {
+    fill: none;
+    stroke: #00ffff;
+    stroke-width: 2.5;
+    stroke-opacity: 0;
+    stroke-dasharray: 6, 6;
+    transition: stroke-opacity 0.4s ease, stroke-dashoffset 8s linear;
+}
+
+.blueprint-highlight.active {
+    stroke-opacity: 0.85;
+    animation: rotate-dash 15s linear infinite;
+}
+
+@keyframes rotate-dash {
+    from { stroke-dashoffset: 0; }
+    to { stroke-dashoffset: 360; }
+}
+
+.blueprint-interactive-label {
+    position: absolute;
+    bottom: 25px;
+    left: 5%;
+    width: 90%;
+    background-color: rgba(6, 8, 10, 0.85);
+    border: 1px solid #142a3a;
+    padding: 10px 15px;
+    font-size: 0.75rem;
+    color: #00ffff;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    text-align: center;
+    z-index: 4;
+}
+
+/* Specifications lists side */
+.specs-side {
+    padding-left: 20px;
+}
+
+.specs-side-title {
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+}
+
+.specs-side-intro {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-bottom: 40px;
+    font-weight: 300;
+}
+
+.specs-table {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+/* Spec tables rows */
+.specs-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 24px;
+    border: 1px solid var(--border-light);
+    border-radius: 1px;
+    background-color: var(--bg-secondary);
+    cursor: pointer;
+    transition: var(--transition-micro);
+}
+
+.specs-row::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 0;
+    background-color: var(--accent-gold);
+    transition: var(--transition-micro);
+}
+
+.specs-row:hover {
+    border-color: var(--accent-gold-dark);
+    padding-left: 28px;
+    background-color: #1a1a1c;
+}
+
+.specs-row.active-spec {
+    border-color: var(--accent-gold);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
+    background-color: #1a1a1c;
+    padding-left: 30px;
+}
+
+.spec-label {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+    color: var(--accent-gold);
+}
+
+.spec-value {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: #ffffff;
+}
+
+/* [NEW STYLING] Page 4.4: Anatomy of the Caliber Cards Grid */
+.engineering-anatomy-section {
+    background-color: var(--bg-secondary);
+    padding: 120px 0;
+    border-top: 1px solid var(--border-light);
+    position: relative;
+}
+
+.anatomy-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    margin-top: 60px;
+}
+
+.anatomy-card {
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-light);
+    padding: 40px 30px;
+    border-radius: 2px;
+    transition: var(--transition-smooth);
+}
+
+.anatomy-card:hover {
+    border-color: var(--accent-gold-dark);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+.anatomy-num {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    font-style: italic;
+    color: var(--accent-gold);
+    display: block;
+    margin-bottom: 15px;
+}
+
+.anatomy-title {
+    font-family: var(--font-heading);
+    font-size: 1.35rem;
+    font-weight: 450;
+    margin-bottom: 15px;
+    color: #ffffff;
+}
+
+.anatomy-text {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    font-weight: 300;
+}
+
+
+/* ==========================================================================
+   10. Page 5: Contact & Bespoke Form
+   ========================================================================== */
+.contact-split-grid {
+    display: grid;
+    grid-template-columns: 45% 55%;
+    min-height: calc(100vh - 90px);
+}
+
+/* Left side coordinates */
+.contact-info-side {
+    background-color: var(--bg-secondary);
+    border-right: 1px solid var(--border-light);
+    display: flex;
+    align-items: center;
+    padding: 80px 60px;
+}
+
+.contact-info-content {
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+.info-eyebrow {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 4px;
+    color: var(--accent-gold);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.info-title {
+    font-size: 3rem;
+    font-weight: 300;
+    margin-bottom: 25px;
+    line-height: 1.15;
+}
+
+.info-lead {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    font-weight: 300;
+    margin-bottom: 50px;
+}
+
+.boutique-list {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+}
+
+.boutique-item {
+    border-left: 1px solid var(--border-light);
+    padding-left: 24px;
+    transition: var(--transition-micro);
+}
+
+.boutique-item:hover {
+    border-left-color: var(--accent-gold);
+}
+
+.boutique-city {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin-bottom: 8px;
+}
+
+.boutique-address {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+    font-weight: 300;
+}
+
+.boutique-coordinates {
+    font-family: var(--font-ui);
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    color: var(--accent-gold);
+    font-weight: 600;
+}
+
+/* Right side luxury bespoke application form */
+.contact-form-side {
+    background-color: var(--bg-primary);
+    display: flex;
+    align-items: center;
+    padding: 80px;
+    position: relative;
+}
+
+.form-content-box {
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.form-eyebrow {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 4px;
+    color: var(--accent-gold);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.form-title {
+    font-size: 2.4rem;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+.form-intro {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 300;
+    margin-bottom: 45px;
+    line-height: 1.6;
+}
+
+.luxury-form {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+}
+
+/* Luxury input floating fields */
+.form-group {
+    position: relative;
+    width: 100%;
+}
+
+.form-input {
+    width: 100%;
+    background: none;
+    border: none;
+    border-bottom: 1px solid var(--border-light);
+    color: #ffffff;
+    font-size: 0.95rem;
+    padding: 12px 0;
+    transition: var(--transition-micro);
+}
+
+/* Select option overrides */
+.select-input {
+    cursor: pointer;
+    background-color: var(--bg-primary);
+}
+
+.select-input option {
+    background-color: var(--bg-secondary);
+    color: #ffffff;
+}
+
+.textarea-input {
+    resize: none;
+}
+
+/* Floating labels alignment */
+.form-label {
+    position: absolute;
+    left: 0;
+    top: 12px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    pointer-events: none;
+    transition: var(--transition-micro);
+}
+
+/* Input activations */
+.form-input:focus, .form-input:not(:placeholder-shown) {
+    border-bottom-color: var(--accent-gold);
+}
+
+.form-input:focus ~ .form-label, 
+.form-input:not(:placeholder-shown) ~ .form-label,
+.select-input:valid ~ .form-label {
+    top: -15px;
+    font-size: 0.75rem;
+    color: var(--accent-gold);
+    letter-spacing: 1px;
+}
+
+.form-submit-box {
+    margin-top: 15px;
+}
+
+.form-submit-btn {
+    width: 100%;
+    justify-content: center;
+}
+
+/* Success Modal Overlay inside contact form card */
+.form-success-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 50;
+}
+
+.form-success-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.success-box {
+    text-align: center;
+    padding: 30px;
+    max-width: 420px;
+    transform: scale(0.9) translateY(20px);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.form-success-overlay.active .success-box {
+    transform: scale(1) translateY(0);
+}
+
+.success-ring {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2px solid var(--border-gold-subtle);
+    margin: 0 auto 30px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.checkmark-svg {
+    width: 40px;
+    height: 40px;
+}
+
+.checkmark-circle {
+    stroke: var(--accent-gold);
+    stroke-width: 2;
+    stroke-dasharray: 166;
+    stroke-dashoffset: 166;
+    stroke-linecap: round;
+    animation: draw-circle 0.6s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+
+.checkmark-check {
+    stroke: var(--accent-gold);
+    stroke-width: 3;
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    stroke-linecap: round;
+    animation: draw-check 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) 0.5s forwards;
+}
+
+@keyframes draw-circle {
+    to { stroke-dashoffset: 0; }
+}
+
+@keyframes draw-check {
+    to { stroke-dashoffset: 0; }
+}
+
+.success-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.success-body {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-bottom: 15px;
+    line-height: 1.6;
+    font-weight: 300;
+}
+
+#allocation-token {
+    font-family: var(--font-ui);
+    color: var(--accent-gold);
+    font-weight: 600;
+}
+
+/* [NEW STYLING] Page 5.4: Bespoke Journey Process Sequence */
+.bespoke-journey-section {
+    background-color: var(--bg-secondary);
+    padding: 120px 0;
+    border-top: 1px solid var(--border-light);
+    position: relative;
+}
+
+.journey-timeline-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    margin-top: 60px;
+}
+
+.journey-step-card {
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-light);
+    padding: 40px 30px;
+    border-radius: 2px;
+    position: relative;
+    transition: var(--transition-smooth);
+}
+
+.journey-step-card:hover {
+    border-color: var(--accent-gold-dark);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    transform: translateY(-5px);
+}
+
+.step-card-num {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    font-style: italic;
+    color: var(--accent-gold-dark);
+    display: block;
+    margin-bottom: 15px;
+}
+
+.journey-step-card:hover .step-card-num {
+    color: var(--accent-gold);
+}
+
+.step-card-title {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 400;
+    margin-bottom: 15px;
+}
+
+.step-card-text {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    font-weight: 300;
+}
+
+
+/* ==========================================================================
+   11. Global Premium Footer
+   ========================================================================== */
+.global-footer {
+    background-color: #060606;
+    border-top: 1px solid var(--border-light);
+    padding: 100px 0 50px 0;
+    position: relative;
+    z-index: 10;
+}
+
+.footer-grid {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 80px 80px 80px;
+    display: grid;
+    grid-template-columns: 35% 65%;
+    gap: 80px;
+}
+
+.footer-brand-side {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-logo {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    letter-spacing: 10px;
+    color: #ffffff;
+    margin-bottom: 15px;
+}
+
+.footer-tagline {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--accent-gold);
+    margin-bottom: 30px;
+}
+
+.footer-atelier-coord {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+}
+
+.footer-links-side {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+}
+
+.footer-heading {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #ffffff;
+    margin-bottom: 25px;
+    font-family: var(--font-ui);
+}
+
+.footer-links-col {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.footer-link {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-weight: 300;
+}
+
+.footer-link:hover {
+    color: var(--accent-gold);
+    padding-left: 2px;
+}
+
+.footer-bottom {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 40px 80px 0 80px;
+    border-top: 1px solid rgba(229, 229, 229, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.copyright {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 300;
+}
+
+.swiss-made {
+    font-size: 0.7rem;
+    letter-spacing: 4px;
+    color: var(--text-secondary);
+    font-weight: 600;
+    border: 1px solid var(--text-muted);
+    padding: 4px 10px;
+}
+
+
+/* ==========================================================================
+   12. Responsive Design (Media Queries)
+   ========================================================================== */
+
+/* Up to 1200px (Laptops & Small Screens) */
+@media (max-width: 1200px) {
+    .hero-title {
+        font-size: 3.2rem;
+    }
+    
+    .pillars-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+    
+    .collection-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+    
+    .collection-grid .collection-card:last-child {
+        grid-column: span 2;
+        max-width: calc(50% - 15px);
+        margin: 0 auto;
+    }
+    
+    .configurator-wrapper {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+    
+    .config-controls-panel {
+        padding-left: 0;
+    }
+    
+    .engineering-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+    
+    .blueprint-side {
+        order: 2;
+    }
+    
+    .specs-side {
+        order: 1;
+        padding-left: 0;
+    }
+    
+    .anatomy-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+    
+    .journey-timeline-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Up to 991px (Tablets) */
+@media (max-width: 991px) {
+    .menu-toggle {
+        display: flex;
+    }
+    
+    .nav-links-wrapper {
+        display: none;
+        position: fixed;
+        top: 90px;
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 90px);
+        background-color: var(--bg-primary);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 35px;
+        z-index: 1000;
+        padding: 40px;
+        border-top: 1px solid var(--border-light);
+    }
+    
+    .nav-links-wrapper.active {
+        display: flex;
+    }
+
+    .global-header.scrolled .nav-links-wrapper {
+        top: 70px;
+        height: calc(100vh - 70px);
+    }
+    
+    .nav-links {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    
+    .scroll-track {
+        height: 250vh !important; /* smooth responsive mobile scroll track */
+    }
+    
+    .hero-sticky-container {
+        position: sticky !important;
+        top: 0 !important;
+        height: 100vh !important;
+        width: 100% !important;
+        overflow: hidden !important;
+    }
+
+    .scroll-caption {
+        top: 55% !important; /* push captions to bottom half to leave top half clear for the canvas watch */
+        left: 5% !important;
+        right: 5% !important;
+        width: 90% !important;
+        max-width: 100% !important;
+        text-align: center !important;
+    }
+
+    .scroll-caption.left-caption, .scroll-caption.right-caption {
+        left: 5% !important;
+        right: 5% !important;
+    }
+
+    .caption-title {
+        font-size: 2.3rem !important; /* scale text down for portrait phone screens */
+        line-height: 1.15 !important;
+        margin-bottom: 15px !important;
+    }
+
+    .caption-lead {
+        font-size: 0.9rem !important;
+        line-height: 1.6 !important;
+        margin-bottom: 25px !important;
+    }
+
+    .scroll-indicator-container {
+        justify-content: center !important;
+    }
+    
+    .registry-banner {
+        grid-template-columns: 1fr;
+        padding: 40px;
+        gap: 40px;
+    }
+    
+    .editorial-row, .editorial-row.reverse {
+        flex-direction: column;
+        padding: 50px 20px;
+        gap: 40px;
+    }
+    
+    .editorial-text-side {
+        text-align: center;
+    }
+    
+    .timeline-spine {
+        left: 30px;
+    }
+    
+    .timeline-node-container, .timeline-node-container.reverse {
+        justify-content: flex-start;
+        padding-left: 60px;
+    }
+    
+    .timeline-node-marker {
+        left: 30px;
+    }
+    
+    .timeline-node-card {
+        width: 100%;
+    }
+    
+    .contact-split-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .contact-info-side {
+        padding: 60px 40px;
+        border-right: none;
+        border-bottom: 1px solid var(--border-light);
+    }
+    
+    .contact-form-side {
+        padding: 60px 40px;
+    }
+    
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+        padding: 0 40px 60px 40px;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        gap: 20px;
+        padding: 30px 40px 0 40px;
+        text-align: center;
+    }
+}
+
+/* Up to 768px (Mobile Devices) */
+@media (max-width: 768px) {
+    .page-title {
+        font-size: 2.8rem;
+    }
+    
+    .section-title-large {
+        font-size: 2.2rem;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .pillars-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .collection-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .collection-grid .collection-card:last-child {
+        max-width: 100%;
+    }
+    
+    .anatomy-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .journey-timeline-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .modal-overlay {
+        padding: 40px 10px; /* Reduce padding on small screens to maximize viewport area */
+    }
+    
+    .modal-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .modal-image-side {
+        border-right: none;
+        border-bottom: 1px solid var(--border-light);
+    }
+    
+    .modal-text-side {
+        padding: 30px;
+    }
+    
+    .footer-links-side {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+}
