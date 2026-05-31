@@ -91,8 +91,8 @@ if (width <= 480) {
     frameStep = 1; // Full elite experience on desktop (128 frames)
 }
 
-const totalSequenceFrames = 128;
-const startFrame = 73;
+const totalSequenceFrames = 82;
+const startFrame = 101;
 
 const images = [];
 let loadedCount = 0;
